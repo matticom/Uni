@@ -3,9 +3,9 @@ package pr1.a04;
 import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import schimkat.berlin.lernhilfe2016ws.io.DirtyFileReader;
+import schimkat.berlin.lernhilfe2016ws.io.DirtyFileWriter;
 
 public class FirstInput {
 
@@ -15,6 +15,7 @@ public class FirstInput {
 	}
 	
 	public static void scannerAusprobieren() {
+		
 		String intNumbers = "3 3 4 4 5 6 6 7 7";
 		String doubleNumbers = "3.1 3.2 4.3 4.4 5.5 6.6 6.7 7.8 7.9";
 		String mixedNumbers = "1 1.3 2 3.3 4 5.5";
@@ -60,6 +61,10 @@ public class FirstInput {
 		Scanner in3 = new Scanner(new DirtyFileReader("./data/Hypothenuse.txt"));
 		printNumbersFrom(in3, 9, 2, out);
 		in3.close();
+		out.close();
+		
+		// Aufgabe 4.b.2
+		copyNumberFile("./data/testfiles/zahlen01.txt", "./data/testfiles/zahlen02.txt", 9, 2);
 	}
 	
 	public static void scanToConsole(Scanner in) {
@@ -110,5 +115,10 @@ public class FirstInput {
 			retValue =  in.nextDouble();
 		} 
 		return retValue;
+	}
+	
+	public static void copyNumberFile(String sourceFilename, String destinationFilename, int width, int precision) {
+		PrintWriter out = new PrintWriter(new DirtyFileWriter(destinationFilename), true);
+		printNumbersFrom(new Scanner(new DirtyFileReader(sourceFilename)), width, precision, out);
 	}
 }
