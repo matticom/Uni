@@ -105,12 +105,8 @@ public class Personen {
 	}
 
 	public static Person createPerson(Scanner dataSource) {
-		String givenName = dataSource.nextLine();
-		if (givenName.equals("")) {
-			givenName = dataSource.nextLine();
-			givenName = dataSource.nextLine();
-		}
-		String surName = dataSource.nextLine();
+		String givenName = dataSource.next();
+		String surName = dataSource.next();
 		int yearOfBirth = dataSource.nextInt();
 		return new Person(givenName, surName, yearOfBirth);
 	}
