@@ -29,7 +29,7 @@ public class MoreMethods {
 		out.println();
 		
 		// Aufgabe e
-		String charSerie = createCharSeries('1', 12); 
+		String charSerie = createCharSeries('2', 12); 
 		out.print(charSerie);
 		out.flush();
 		charSerie = createCharSeries('a', 60); 
