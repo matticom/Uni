@@ -28,6 +28,7 @@ public class Personen {
 		printPersons(personList, out);
 		printPersons(personSet, out);
 		printPersons(personSet, "./listen/PersonSetAufgabe5b3.txt");
+		out.close();
 	}
 
 	public static void aufgabeC(PrintWriter out) {
