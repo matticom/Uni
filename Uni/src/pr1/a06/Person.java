@@ -2,18 +2,18 @@ package pr1.a06;
 
 public class Person {
 
-	String Vorname;
-	String Nachname;
-	int Geburtsjahr;
+	String vorname;
+	String nachname;
+	int geburtsjahr;
 	
 	public Person(String Vorname, String Nachname, int Geburtsjahr) {
-		this.Vorname = Vorname;
-		this.Nachname = Nachname;
-		this.Geburtsjahr = Geburtsjahr;
+		this.vorname = Vorname;
+		this.nachname = Nachname;
+		this.geburtsjahr = Geburtsjahr;
 	}
 	
 	public Person(Person person) {
-		this(person.Vorname, person.Nachname, person.Geburtsjahr);
+		this(person.vorname, person.nachname, person.geburtsjahr);
 	}
 	
 	public Person(schimkat.berlin.lernhilfe2016ws.objectPlay.Person person) {
@@ -21,29 +21,37 @@ public class Person {
 	}
 
 	public String getVorname() {
-		return Vorname;
+		return vorname;
 	}
 
 	public String getNachname() {
-		return Nachname;
+		return nachname;
 	}
 
 	public int getGeburtsjahr() {
-		return Geburtsjahr;
+		return geburtsjahr;
 	}
 
 	@Override
 	public String toString() {
-		return "Vorname: " + Vorname + " / Nachname: " + Nachname + " / Geburtsjahr: " + Geburtsjahr;
+		String personStr = vorname;
+		for (int i = vorname.length(); i < 25; i++) {
+			personStr += " ";
+		}
+		personStr += nachname;
+		for (int i = nachname.length(); i < 25; i++) {
+			personStr += " ";
+		}
+		return personStr += geburtsjahr;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Vorname == null) ? 0 : Vorname.hashCode());
-		result = prime * result + ((Nachname == null) ? 0 : Nachname.hashCode());
-		result = prime * result + Geburtsjahr;
+		result = prime * result + geburtsjahr;
+		result = prime * result + ((nachname == null) ? 0 : nachname.hashCode());
+		result = prime * result + ((vorname == null) ? 0 : vorname.hashCode());
 		return result;
 	}
 
@@ -56,17 +64,17 @@ public class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (Vorname == null) {
-			if (other.Vorname != null)
-				return false;
-		} else if (!Vorname.equals(other.Vorname))
+		if (geburtsjahr != other.geburtsjahr)
 			return false;
-		if (Nachname == null) {
-			if (other.Nachname != null)
+		if (nachname == null) {
+			if (other.nachname != null)
 				return false;
-		} else if (!Nachname.equals(other.Nachname))
+		} else if (!nachname.equals(other.nachname))
 			return false;
-		if (Geburtsjahr != other.Geburtsjahr)
+		if (vorname == null) {
+			if (other.vorname != null)
+				return false;
+		} else if (!vorname.equals(other.vorname))
 			return false;
 		return true;
 	}

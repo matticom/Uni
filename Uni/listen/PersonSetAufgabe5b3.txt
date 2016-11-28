@@ -1,82 +1,22 @@
-Benjamin
-Zielinkow
-1965
-
-Fred
-Mannsill
-1979
-
-Adalbert
-Hopfman
-1976
-
-Benjamin
-Zielinkow
-1941
-
-Detlef
-Wertogg
-1923
-
-Martha
-Tildart
-1981
-
-Daniel
-Salder
-1987
-
-Carl
-Subaries
-1955
-
-Frida
-Flogat
-1992
-
-Gustav
-Andersch
-1956
-
-Henry
-Qualdow
-1973
-
-Bert
-Zielinkow
-1907
-
-Greta
-Hohlborn
-1969
-
-Sebastian
-Torgall
-2002
-
-Carla
-Subaries
-1965
-
-Alfred
-Hopfman
-1977
-
-Helga
-Hornbach
-1973
-
-Constatin
-Berthold
-1943
-
-Xaver
-Ambachski
-2004
-
-Andreas
-Hopfman
-1971
-
+Gustav                   Andersch                 1956
+Carl                     Subaries                 1955
+Andreas                  Hopfman                  1971
+Benjamin                 Zielinkow                1965
+Helga                    Hornbach                 1973
+Constatin                Berthold                 1943
+Frida                    Flogat                   1992
+Greta                    Hohlborn                 1969
+Benjamin                 Zielinkow                1941
+Henry                    Qualdow                  1973
+Martha                   Tildart                  1981
+Alfred                   Hopfman                  1977
+Daniel                   Salder                   1987
+Sebastian                Torgall                  2002
+Fred                     Mannsill                 1979
+Xaver                    Ambachski                2004
+Carla                    Subaries                 1965
+Adalbert                 Hopfman                  1976
+Bert                     Zielinkow                1907
+Detlef                   Wertogg                  1923
 
 

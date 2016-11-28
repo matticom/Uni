@@ -79,10 +79,16 @@ public class Personen {
 
 	public static void printPersons(ArrayList<Person> persons, PrintWriter out) {
 		for (Person person : persons) {
-			out.println(person.getVorname());
-			out.println(person.getNachname());
-			out.println(person.getGeburtsjahr());
-			out.println();
+			String personStr = person.getVorname();
+			for (int i = person.getVorname().length(); i < 25; i++) {
+				personStr += " ";
+			}
+			personStr += person.getNachname();
+			for (int i = person.getNachname().length(); i < 25; i++) {
+				personStr += " ";
+			}
+			personStr += person.getGeburtsjahr();
+			out.println(personStr);
 		}
 		out.println();
 		out.println();
@@ -90,10 +96,16 @@ public class Personen {
 
 	public static void printPersons(HashSet<Person> persons, PrintWriter out) {
 		for (Person person : persons) {
-			out.println(person.getVorname());
-			out.println(person.getNachname());
-			out.println(person.getGeburtsjahr());
-			out.println();
+			String personStr = person.getVorname();
+			for (int i = person.getVorname().length(); i < 25; i++) {
+				personStr += " ";
+			}
+			personStr += person.getNachname();
+			for (int i = person.getNachname().length(); i < 25; i++) {
+				personStr += " ";
+			}
+			personStr += person.getGeburtsjahr();
+			out.println(personStr);
 		}
 		out.println();
 		out.println();
