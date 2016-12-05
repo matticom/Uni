@@ -6,7 +6,7 @@ import schimkat.berlin.lernhilfe2016ws.objectPlay.PersonList;
 public class PersonTest {
 
 	public static void main(String[] args) {
-		Person person1 = new Person("Oliverer", "Burke", 1993);
+		Person person1 = new Person("Oliver", "Burke", 1993);
 		Person person2 = new Person("Davie", "Selke", 1984);
 		Person person3 = new Person(person2);
 		PersonList personList = PersonFactory.createTestPersonliste();

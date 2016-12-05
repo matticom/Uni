@@ -5,6 +5,13 @@ public class HelloNumbers
 
 	public static void main(String[] args)
 	{
+		
+		try {
+			int[] ar = new int[1];
+			ar[10] = 10;
+		} catch (Exception e) {
+			System.out.println("War in catch");
+		}
 		someExpressions();
 
 	}

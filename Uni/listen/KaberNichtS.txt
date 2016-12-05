@@ -1,8 +1,8 @@
-Marvin                   Comppner                 1981
-Terrence                 Boyd                     1989
-Fabio                    Coltorti                 1983
-Diego                    Demme                    1991
-Stefan                   Ilsanker                 1983
-Marcel                   Halstenberg              1984
+Comppner                 Marvin                   1981                     
+Boyd                     Terrence                 1989                     
+Halstenberg              Marcel                   1984                     
+Ilsanker                 Stefan                   1983                     
+Demme                    Diego                    1991                     
+Coltorti                 Fabio                    1983                     
 
 
