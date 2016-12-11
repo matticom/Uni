@@ -19,6 +19,5 @@ public class FirstGraphics implements Drawable{
 		gitterFein.draw(g);
 		Gitter gitterGrob = new Gitter(100, 100, Color.BLACK);
 		gitterGrob.draw(g);
-		
 	}
 }

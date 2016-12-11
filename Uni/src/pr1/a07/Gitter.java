@@ -21,9 +21,7 @@ public class Gitter implements Drawable {
 	}
 
 	public Gitter(Gitter gitter) {
-		this.dx = gitter.dx;
-		this.dy = gitter.dy;
-		this.color = gitter.color;
+		this(gitter.dx, gitter.dy, gitter.color);
 	}
 	
 	public Gitter(int dx, int dy) {
@@ -32,8 +30,7 @@ public class Gitter implements Drawable {
 	}
 	
 	public Gitter(int dx, int dy, Color color) {
-		this.dx = dx;
-		this.dy = dy;
+		this(dx, dy);
 		this.color = color;
 	}
 
@@ -41,7 +38,6 @@ public class Gitter implements Drawable {
 	public void draw(Graphics g) {
 		g.setColor(color);
 		drawGrid(g);
-
 	}
 	
 	private void drawGrid(Graphics g) {
@@ -68,7 +64,4 @@ public class Gitter implements Drawable {
 	public int getDy() {
 		return dy;
 	}
-	
-	
-
 }

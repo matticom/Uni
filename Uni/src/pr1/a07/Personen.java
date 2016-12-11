@@ -34,7 +34,6 @@ public class Personen {
 
 	public static void aufgabeC(PrintWriter out) {
 
-		;
 		Scanner onePerson = new Scanner(new DirtyFileReader("./listen/sportfreunde.txt"));
 		Scanner personSet = new Scanner(new DirtyFileReader("./listen/sportfreunde.txt"));
 
@@ -120,8 +119,7 @@ public class Personen {
 		kommilitonenAndTestpersonen.sort(new NameComparator());
 		printPersons(kommilitonenAndTestpersonen, out);
 		
-		out.close();
-				
+		out.close();		
 	}
 		
 	public static void printPersons(ArrayList<Person> persons, PrintWriter out) {
