@@ -40,17 +40,5 @@ public class RotatingPoint extends Point implements ChangingWithTime, Drawable{
 		return time;
 	}
 	
-	public static void main(String[] args) {
-		DirtyPainter dp = new DirtyPainter();
-		double timeValue = 0;
-		RotatingPoint rotatingPoint = new RotatingPoint(20, 20, 200, timeValue);
-		dp.add(rotatingPoint);
-		
-		while (true) {
-			timeValue += Math.PI/6;
-			rotatingPoint.changeTimeTo(timeValue);
-			dp.showDrawingAfterWaiting(10);
-			dp.showDrawing();
-		}
-	}
+	
 }

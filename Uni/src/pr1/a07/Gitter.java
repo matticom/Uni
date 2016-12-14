@@ -12,12 +12,13 @@ public class Gitter implements Drawable {
 	protected final int RANGE_X_MAX = 1000;
 	protected final int RANGE_Y_MAX = 1000;
 
-	protected int dx = 100;
-	protected int dy = 100;
+	protected int dx;
+	protected int dy;
 	
-	protected Color color = Color.YELLOW;
+	protected Color color;
 
 	public Gitter() {
+		this(100, 100, Color.YELLOW);
 	}
 
 	public Gitter(Gitter gitter) {
@@ -27,6 +28,7 @@ public class Gitter implements Drawable {
 	public Gitter(int dx, int dy) {
 		this.dx = dx;
 		this.dy = dy;
+		color = Color.YELLOW;
 	}
 	
 	public Gitter(int dx, int dy, Color color) {

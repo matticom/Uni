@@ -13,10 +13,10 @@ public class Test {
 		
 		// Zeichnen eigener Objekte
 		DirtyPainter painter = new DirtyPainter();
-		painter.add(new FirstGraphics());
-		painter.add(new Lines());
+//		painter.add(new FirstGraphics());
+//		painter.add(new Lines());
 		
-//		gitterTest(painter);
+		gitterTest(painter);
 		painter.showDrawing();
 	}
 	
