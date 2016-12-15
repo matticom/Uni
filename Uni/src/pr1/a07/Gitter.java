@@ -26,13 +26,12 @@ public class Gitter implements Drawable {
 	}
 	
 	public Gitter(int dx, int dy) {
-		this.dx = dx;
-		this.dy = dy;
-		color = Color.YELLOW;
+		this(dx, dy, Color.YELLOW);
 	}
 	
 	public Gitter(int dx, int dy, Color color) {
-		this(dx, dy);
+		this.dx = dx;
+		this.dy = dy;
 		this.color = color;
 	}
 
