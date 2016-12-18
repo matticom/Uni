@@ -16,7 +16,7 @@ public class Test {
 //		dp.add(rotatingPoint4);
 		
 		while (true) {
-//			timeValue += Math.PI/6;
+			timeValue += Math.PI/6;
 			rotatingPoint.changeTimeTo(timeValue);
 //			rotatingPoint2.changeTimeTo(timeValue+Math.PI*2/4);
 //			rotatingPoint3.changeTimeTo(timeValue+Math.PI*4/4);

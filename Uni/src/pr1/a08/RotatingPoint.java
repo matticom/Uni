@@ -28,7 +28,7 @@ public class RotatingPoint extends Point implements ChangingWithTime, Drawable{
 	
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.MAGENTA);
+		g.setColor(Color.GREEN);
 		g.fillOval(x-4, y-4, 8, 8);
 	}
 

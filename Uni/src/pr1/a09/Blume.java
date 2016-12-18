@@ -22,6 +22,7 @@ public class Blume extends Pflanze {
 	public void changeTimeTo(double timeValue) {
 		double change = timeValue - time;
 		time = timeValue;
+//		System.out.println("aktuelle Höhe: " + height);
 		if (timeValue < 4 || timeValue > 20) {
 			return;
 		}
@@ -31,8 +32,6 @@ public class Blume extends Pflanze {
 		if (change < 0) {
 			gehtEin();
 		}
-		
-		System.out.println("aktuelle Höhe: " + height);
 	}
 
 	private void drawBluetenBlaetter(Graphics g) {

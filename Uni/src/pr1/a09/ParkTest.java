@@ -19,26 +19,24 @@ public class ParkTest {
 		Park park = new Park(pflanzenList, positionArray, new Schnee(), new Sonne());
 		painter.add(park);
 
-		double time = 5;
+		double time = 0;
 		int counter = 0;
-		int vorwaerts = 0;
-		int rueckwarts = 0;
+		int forward = 0;
+		int backward = 0;
 
 		while (true) {
 			counter++;
 			int intDiv = counter / 25;
 
 			if (intDiv % 2 == 0) {
-				time = vorwaerts++;
-				rueckwarts = 24;
+				time = forward++;
+				backward = 24;
 			} else {
-				time = rueckwarts--;
-				vorwaerts = 0;
+				time = backward--;
+				forward = 0;
 			}
-
 			park.changeTimeTo(time);
-			System.out.println(time);
-
+//			System.out.println(time);
 			painter.showDrawingAfterWaiting(500);
 		}
 	}

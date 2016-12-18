@@ -23,7 +23,7 @@ public class Park implements Drawable, ChangingWithTime {
 	
 	@Override
 	public void draw(Graphics g) {
-	
+		sonne.draw(g);
 		for(int i = 0; i < pflanzenList.size(); i++) {
 			int x = positionArray[i][0];
 			int y = positionArray[i][1];
@@ -32,7 +32,6 @@ public class Park implements Drawable, ChangingWithTime {
 			g.translate(-x, -y);
 		}
 		schnee.draw(g);
-		sonne.draw(g);
 	}
 
 	@Override
