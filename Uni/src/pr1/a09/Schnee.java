@@ -22,10 +22,14 @@ public class Schnee implements ChangingWithTime, Drawable {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.WHITE);
+		drawSnowFlakes(g);
+	}
+	
+	private void drawSnowFlakes(Graphics g) {
 		if (time != 0) {
 			for (double density = 1; density < 500 / time; density++) {
 				int x = (int) (Math.random() * 1500);
-				int y = (int) (Math.random() * 1000);
+				int y = (int) (Math.random() * 1400);
 				g.fillOval(x, y, 4, 4);
 			}
 		}

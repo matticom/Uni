@@ -1,9 +1,7 @@
 package pr1.a09;
 
-import java.awt.Point;
-
 import pr1.a08.ChangingWithTime;
-import schimkat.berlin.lernhilfe2016ws.graphics.DirtyPainter;
+import pr1.a08.Point;
 import schimkat.berlin.lernhilfe2016ws.graphics.Drawable;
 
 public abstract class Pflanze extends Point implements Drawable, ChangingWithTime {
@@ -14,6 +12,7 @@ public abstract class Pflanze extends Point implements Drawable, ChangingWithTim
 	protected double GROW_FACTOR;
 
 	public Pflanze(double MAX_HEIGHT, double GROW_FACTOR) {
+		super(0, 0);
 		this.MAX_HEIGHT = MAX_HEIGHT;
 		this.GROW_FACTOR = GROW_FACTOR;
 		height = 0;

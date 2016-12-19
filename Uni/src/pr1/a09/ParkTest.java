@@ -13,10 +13,10 @@ public class ParkTest {
 		Collection<Pflanze> pflanzenList = new ArrayList<Pflanze>();
 		pflanzenList = fillPflanzenList(pflanzenList);
 
-		int[][] positionArray = new int[pflanzenList.size()][2];
-		positionArray = setPflanzenPositions(positionArray);
+		int[][] pflanzenPosition = new int[pflanzenList.size()][2];
+		pflanzenPosition = setPflanzenPositions(pflanzenPosition);
 		
-		Park park = new Park(pflanzenList, positionArray, new Schnee(), new Sonne());
+		Park park = new Park(pflanzenList, pflanzenPosition, new Schnee(), new Sonne());
 		painter.add(park);
 
 		double time = 0;
@@ -43,8 +43,8 @@ public class ParkTest {
 
 	private static int[][] setPflanzenPositions(int[][] positionArray) {
 		for (int i = 0; i < positionArray.length; i++) {
-			positionArray[i][0] = (int) (Math.random() * 1200 + 100);
-			positionArray[i][1] = (int) (Math.random() * 700 + 100);
+			positionArray[i][0] = (int) (Math.random() * 1000 + 150);
+			positionArray[i][1] = (int) (Math.random() * 700 + 300);
 		}
 		return positionArray;
 	}

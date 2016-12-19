@@ -19,33 +19,35 @@ public class Baum extends Pflanze {
 	}
 
 	private void drawStem(Graphics g) {
-		g.setColor(createColor(139, 90, 43));
-		g.fillRect(-20, 0, 40, 250);
+		g.setColor(ColorCreator.createColor(139, 90, 43));
+		g.fillRect(getX()-20, getY()+0, 40, 250);
 	}
 
 	private void drawBranches(Graphics g) {
-		g.fillPolygon(new int[] { -100, -90, -5, -20 }, new int[] { -100, -100, 0, 10 }, 4);
-		g.fillPolygon(new int[] { 90, 100, 20, 0 }, new int[] { -100, -100, 10, 10 }, 4);
-		g.fillRect(50, -50, 80, 5);
-		g.fillRect(-100, -30, 60, 5);
-		g.fillRect(-140, -80, 60, 5);
-		g.fillRect(-60, -110, 5, 60);
-		g.fillRect(70, -130, 5, 60);
-		g.fillRect(30, -80, 5, 60);
+		g.fillPolygon(new int[] { getX() - 100, getX() - 90, getX() - 5, getX() - 20 }, 
+						new int[] { getY() - 100, getY() - 100, getY() + 0, getY() + 10 }, 4);
+		g.fillPolygon(new int[] { getX() + 90, getX() + 100, getX() + 20, getX() + 0 }, 
+						new int[] { getY() - 100, getY() - 100, getY() + 10, getY() + 10 }, 4);
+		g.fillRect(getX() + 50, getY() - 50, 80, 5);
+		g.fillRect(getX() - 100, getY() - 30, 60, 5);
+		g.fillRect(getX() - 140, getY() - 80, 60, 5);
+		g.fillRect(getX() - 60, getY() - 110, 5, 60);
+		g.fillRect(getX() + 70, getY() - 130, 5, 60);
+		g.fillRect(getX() + 30, getY() - 80, 5, 60);
 	}
 
 	private void drawLeaves(Graphics g) {
-		g.setColor(createColor(0, 153, 0));
-		int x, y;
+		g.setColor(ColorCreator.createColor(0, 153, 0));
+		int relX, relY;
 		double leavesRadius = 3 * (height/30);
 //		System.out.println("Blätterradius: " + blaetterRadius);
 		double density = height * 2;
 //		System.out.println("Dichte: " + dichte);
 		for (int radius = 0; radius < 160; radius += 5) {
 			for (double angle = 0; angle < Math.PI * 2; angle += 2*Math.PI / density) {
-				x = (int) (0 + radius * Math.cos(angle));
-				y = (int) (80 + radius * Math.sin(angle));
-				g.fillOval((int) (-leavesRadius / 2 - x), (int) (-leavesRadius / 2 - y), (int) (leavesRadius), (int) (leavesRadius));
+				relX = (int) (0 + radius * Math.cos(angle));
+				relY = (int) (80 + radius * Math.sin(angle));
+				g.fillOval((int) (-leavesRadius / 2 - relX + getX()), (int) (-leavesRadius / 2 - relY + getY()), (int) (leavesRadius), (int) (leavesRadius));
 			}
 		}
 	}
@@ -65,11 +67,5 @@ public class Baum extends Pflanze {
 			gehtEin();
 		}
 
-	}
-
-	private Color createColor(int R, int G, int B) {
-		float[] HSBArray = new float[3];
-		Color.RGBtoHSB(R, G, B, HSBArray);
-		return Color.getHSBColor(HSBArray[0], HSBArray[1], HSBArray[2]);
 	}
 }
