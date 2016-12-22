@@ -12,9 +12,8 @@ public class Schnee implements ChangingWithTime, Drawable {
 
 	@Override
 	public void changeTimeTo(double timeValue) {
-		if (timeValue < 6) {
-			time = ++timeValue;
-		} else {
+		time = 12 * Math.sin(Math.PI * timeValue/20 - Math.PI/4) + 13;
+		if (time > 6) {
 			time = 0;
 		}
 	}

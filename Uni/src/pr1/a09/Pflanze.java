@@ -7,7 +7,6 @@ import schimkat.berlin.lernhilfe2016ws.graphics.Drawable;
 public abstract class Pflanze extends Point implements Drawable, ChangingWithTime {
 
 	protected double height;
-	protected double time;
 	protected double MAX_HEIGHT;
 	protected double GROW_FACTOR;
 
@@ -16,7 +15,6 @@ public abstract class Pflanze extends Point implements Drawable, ChangingWithTim
 		this.MAX_HEIGHT = MAX_HEIGHT;
 		this.GROW_FACTOR = GROW_FACTOR;
 		height = 0;
-		time = 0;
 	}
 
 	protected void waechst() {

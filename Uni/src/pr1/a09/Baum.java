@@ -17,9 +17,22 @@ public class Baum extends Pflanze {
 			drawLeaves(g);
 		}
 	}
+	
+	@Override
+	public void changeTimeTo(double timeValue) {
+		double dayLightDuration = 12 * Math.sin(Math.PI * timeValue/20 - Math.PI/4) + 12;
+		if (timeValue < 4) {
+			return;
+		}
+		if (Math.cos(Math.PI * timeValue/20 - Math.PI/4) >= 0) {
+			waechst();
+		} else {
+			gehtEin();
+		}
+	}
 
 	private void drawStem(Graphics g) {
-		g.setColor(ColorCreator.createColor(139, 90, 43));
+		g.setColor(new Color(139, 90, 43));
 		g.fillRect(getX()-20, getY()+0, 40, 250);
 	}
 
@@ -37,7 +50,7 @@ public class Baum extends Pflanze {
 	}
 
 	private void drawLeaves(Graphics g) {
-		g.setColor(ColorCreator.createColor(0, 153, 0));
+		g.setColor(new Color(0, 153, 0));
 		int relX, relY;
 		double leavesRadius = 3 * (height/30);
 //		System.out.println("Blätterradius: " + blaetterRadius);
@@ -52,20 +65,5 @@ public class Baum extends Pflanze {
 		}
 	}
 
-	@Override
-	public void changeTimeTo(double timeValue) {
-		double change = timeValue - time;
-		time = timeValue;
-//		System.out.println("aktuelle Höhe: " + height);
-		if (timeValue < 4) {
-			return;
-		}
-		if (change >= 0) {
-			waechst();
-		}
-		if (change < 0) {
-			gehtEin();
-		}
-
-	}
+	
 }

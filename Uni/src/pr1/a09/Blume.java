@@ -14,27 +14,24 @@ public class Blume extends Pflanze {
 		drawFlowerStem(g);
 		drawBloom(g);
 		if (height > 20) {
-			drawPetals(g);
+			drawBloomLeaves(g);
 		}
 	}
 
 	@Override
 	public void changeTimeTo(double timeValue) {
-		double change = timeValue - time;
-		time = timeValue;
-//		System.out.println("aktuelle Höhe: " + height);
+		double dayLightDuration = 12 * Math.sin(Math.PI * timeValue/20 - Math.PI/4) + 12;
 		if (timeValue < 4) {
 			return;
 		}
-		if (change >= 0) {
+		if (Math.cos(Math.PI * timeValue/20 - Math.PI/4) >= 0) {
 			waechst();
-		}
-		if (change < 0) {
+		} else {
 			gehtEin();
 		}
 	}
 
-	private void drawPetals(Graphics g) {
+	private void drawBloomLeaves(Graphics g) {
 		int relX, relY;
 		double radius = (height-7)*1;
 		double blaetterRadius = (height-10)*1.2;
@@ -53,7 +50,7 @@ public class Blume extends Pflanze {
 	}
 
 	private void drawFlowerStem(Graphics g) {
-		g.setColor(ColorCreator.createColor(154,205,50));
+		g.setColor(new Color(154,205,50));
 		g.fillRect(-2 + getX(), 0 + getY(), 4, 150);
 	}
 }
