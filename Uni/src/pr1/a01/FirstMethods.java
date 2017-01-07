@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 public class FirstMethods {
 
+	
 	public static void printText(PrintWriter out, String text) {
 		out.print(text + "noch mehr Text");
 		out.flush();
