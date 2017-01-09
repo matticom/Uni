@@ -17,7 +17,6 @@ public class TestStringUtil {
 			out.printf("Anzahl der Whitespacezeichen: %5.2f %%\n", StringUtil.getRatioWhitespaceToAll(testString));
 			out.println();
 		}
-		
 		out.println("\n\n\nDer String in der Datei: '");
 		
 		Scanner in = new Scanner(new DirtyFileReader("./data/StringUtilTestText.txt"));

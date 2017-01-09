@@ -46,33 +46,24 @@ public class StringUtil {
 	}
 
 	public static int countUpperCaseChar(File textfile) {
-		List<String> linesAsStringList = getLinesOfTextFileAsListOfStrings(textfile);
-		int numbersOfUpperCaseChar = 0;
-		for (String line : linesAsStringList) {
-			numbersOfUpperCaseChar += countUpperCaseChar(line);
-		}
-		return numbersOfUpperCaseChar;
+		return countUpperCaseChar(getStringOfTextFile(textfile));
 	}
 
 	public static double getRatioWhitespaceToAll(File textfile) {
-		List<String> linesAsStringList = getLinesOfTextFileAsListOfStrings(textfile);
-		int numbersOfWhitespaceChar = 0;
-		int numbersOfAllChar = 0;
-		for (String line : linesAsStringList) {
-			numbersOfAllChar += line.length();
-			numbersOfWhitespaceChar += countWhiteSpaceChar(line);
-		}
-		return 100.0 * numbersOfWhitespaceChar / numbersOfAllChar;
+		return getRatioWhitespaceToAll(getStringOfTextFile(textfile));
 	}
 
-	private static List<String> getLinesOfTextFileAsListOfStrings(File textfile) {
+	private static String getStringOfTextFile(File textfile) {
 		Scanner in = new Scanner(new DirtyFileReader(textfile));
-		List<String> linesAsStringList = new ArrayList<String>();
+		StringBuilder sb = new StringBuilder();
 		while(in.hasNextLine()) {
-			linesAsStringList.add(in.nextLine());
+			if (sb.length() > 0) {
+				sb.append("\n");
+			}
+			sb.append(in.nextLine());
 		}
 		in.close();
-		return linesAsStringList;
+		return sb.toString();
 	}
 
 	private static int countWhiteSpaceChar(String s) {
