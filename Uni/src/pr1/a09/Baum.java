@@ -21,7 +21,7 @@ public class Baum extends Pflanze {
 	@Override
 	public void changeTimeTo(double timeValue) {
 		double dayLightDuration = 12 * Math.sin(Math.PI * timeValue/20 - Math.PI/4) + 12;
-		if (timeValue < 4) {
+		if (dayLightDuration < 4) {
 			return;
 		}
 		if (Math.cos(Math.PI * timeValue/20 - Math.PI/4) >= 0) {

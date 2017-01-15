@@ -29,5 +29,4 @@ public class TestStringUtil {
 		out.printf("Anzahl der Whitespacezeichen in der Datei: %5.2f %%\n", StringUtil.getRatioWhitespaceToAll(new File("./data/StringUtilTestText.txt")));
 		out.println();
 	}
-
 }
