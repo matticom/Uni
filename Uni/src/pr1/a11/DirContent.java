@@ -10,7 +10,6 @@ public class DirContent {
 		if (!path.isDirectory() || !path.exists()) {
 			throw new IllegalArgumentException("Verzeichnis existiert nicht oder ist eine Datei");
 		}
-		
 		printParentDir(out, path);
 		for (File file: path.listFiles()) {
 			if (file.isDirectory()) {
@@ -23,12 +22,15 @@ public class DirContent {
 		out.println();
 	}
 	
+	public static void printAll(String path) {
+		printAll(new File(path));
+	}
+	
 	public static void printFilesOnly(File path) {
 		PrintWriter out = new PrintWriter(System.out, true);
 		if (!path.isDirectory() || !path.exists()) {
 			throw new IllegalArgumentException("Verzeichnis existiert nicht oder ist eine Datei");
 		}
-		
 		printParentDir(out, path);
 		for (File file: path.listFiles()) {
 			if (!file.isDirectory()) {
@@ -44,7 +46,6 @@ public class DirContent {
 		if (!path.isDirectory() || !path.exists()) {
 			throw new IllegalArgumentException("Verzeichnis existiert nicht oder ist eine Datei");
 		}
-		
 		printParentDir(out, path);
 		for (File file: path.listFiles()) {
 			if (file.isDirectory()) {
@@ -62,13 +63,9 @@ public class DirContent {
 			printDirsOnly(file);
 		}
 	}
-	
-	public static void printAll(String path) {
-		printAll(new File(path));
-	}
-	
+		
 	private static void printParentDir(PrintWriter out, File file) {
-		out.printf("Verzeichnis\t %s\n\n", file.getPath());
+		out.printf("Verzeichnis\t %s\n\n", file.getPath().replaceAll("\\\\", "/"));
 	}
 	
 	private static void printSubDir(PrintWriter out, File file) {
@@ -78,5 +75,4 @@ public class DirContent {
 	private static void printFile(PrintWriter out, File file) {
 		out.printf("Datei\t\t\t %s\n", file.getName());
 	}
-	
 }
