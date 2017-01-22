@@ -13,8 +13,8 @@ public class ColorTableTest {
 		dp.add(colorTable);
 		dp.showDrawing();
 	}
-	// Hat static final Konstanten von der Methodenverbundklasse 
-	// aber keine Klassenmethoden
+	// Die Color-fx Klasse hat static final Konstanten von der  
+	// Methodenverbundklasse aber keine Klassenmethoden
 	// Es sind statische Factories vorhanden von Bauplanklassen
 	// fx-Color ist immutable wegen: public final class Color
 }

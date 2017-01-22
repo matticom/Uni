@@ -3,7 +3,6 @@ package pr1.a12;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Colors {
 
 	private static java.awt.Color awtColor(javafx.scene.paint.Color c) {

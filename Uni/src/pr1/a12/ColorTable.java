@@ -9,21 +9,21 @@ import schimkat.berlin.lernhilfe2016ws.graphics.Drawable;
 public final class ColorTable implements Drawable {
 
 	protected Map<String, Color> colorMap;
-	protected String[] keys;
+	protected String[] keySet;
 	
 	public ColorTable(String[] fxColorNames) {
 		colorMap = Colors.createMapByName(fxColorNames);
-		keys = new String[colorMap.size()];
-		keys = colorMap.keySet().toArray(keys);
+		keySet = new String[colorMap.size()];
+		keySet = colorMap.keySet().toArray(keySet);
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		for(int i = 0; i < colorMap.size(); i++) {
-			g.setColor(colorMap.get(keys[i]));
+			g.setColor(colorMap.get(keySet[i]));
 			g.fillRect(50, 50 + i*50, 50, 30);
 			g.setColor(Color.BLACK);
-			g.drawString(keys[i], 110, 70 + i*50);
+			g.drawString(keySet[i], 110, 70 + i*50);
 		}
 	}
 }
