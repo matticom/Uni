@@ -2,57 +2,38 @@ package pr1.a11;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DirContent {
 
 	public static void printAll(File path) {
-		PrintWriter out = new PrintWriter(System.out, true);
-		if (!path.isDirectory() || !path.exists()) {
-			throw new IllegalArgumentException("Verzeichnis existiert nicht oder ist eine Datei");
+		checkInputAndPrintFullParentPath(path);
+		List<File>[] dirsAndFilesList = sortOutDirsAndFiles(path);
+		List<File> dirList = dirsAndFilesList[1];
+		List<File> fileList = dirsAndFilesList[0];
+		for (File file: fileList) {
+			printFile(file);
 		}
-		
-		printParentDir(out, path);
-		for (File file: path.listFiles()) {
-			if (file.isDirectory()) {
-				printSubDir(out, file);
-			} else {
-				printFile(out, file);
-			}
+		for (File file: dirList) {
+			printSubDir(file);
 		}
-		out.println();
-		out.println();
 	}
 	
 	public static void printFilesOnly(File path) {
-		PrintWriter out = new PrintWriter(System.out, true);
-		if (!path.isDirectory() || !path.exists()) {
-			throw new IllegalArgumentException("Verzeichnis existiert nicht oder ist eine Datei");
+		checkInputAndPrintFullParentPath(path);
+		List<File> fileList = sortOutDirsAndFiles(path)[1];
+		for (File file: fileList) {
+			printFile(file);
 		}
-		
-		printParentDir(out, path);
-		for (File file: path.listFiles()) {
-			if (!file.isDirectory()) {
-				printFile(out, file);
-			}
-		}
-		out.println();
-		out.println();
 	}
 	
 	public static void printDirsOnly(File path) {
-		PrintWriter out = new PrintWriter(System.out, true);
-		if (!path.isDirectory() || !path.exists()) {
-			throw new IllegalArgumentException("Verzeichnis existiert nicht oder ist eine Datei");
+		checkInputAndPrintFullParentPath(path);
+		List<File> dirList = sortOutDirsAndFiles(path)[0];
+		for (File file: dirList) {
+			printSubDir(file);
 		}
-		
-		printParentDir(out, path);
-		for (File file: path.listFiles()) {
-			if (file.isDirectory()) {
-				printSubDir(out, file);
-			}
-		}
-		out.println();
-		out.println();
 	}
 	
 	public static void test(File[] paths) {
@@ -63,20 +44,51 @@ public class DirContent {
 		}
 	}
 	
+	public static void pathArgumentTest(File path) {
+		if (!path.exists()) {
+			throw new IllegalArgumentException("Verzeichnis oder Datei existiert nicht");
+		}
+	}
+	
+	public static List<File>[] sortOutDirsAndFiles(File path) {
+		List<File>[] filesAndDirsLists = new List[2];
+		List<File> filesList = new ArrayList<File>();
+		List<File> dirsList = new ArrayList<File>();
+		for (File file: path.listFiles()) {
+			if (file.isDirectory()) {
+				dirsList.add(file);
+			} else {
+				filesList.add(file);
+			}
+		}
+		filesAndDirsLists[0] = filesList;
+		filesAndDirsLists[1] = dirsList;
+		return filesAndDirsLists;
+	}
+	
+	public static void checkInputAndPrintFullParentPath(File path) {
+		try {
+			pathArgumentTest(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		printParentDir(path);
+	}
+	
 	public static void printAll(String path) {
 		printAll(new File(path));
 	}
 	
-	private static void printParentDir(PrintWriter out, File file) {
-		out.printf("Verzeichnis\t %s\n\n", file.getPath());
+	private static void printParentDir(File file) {
+		System.out.printf("Verzeichnis\t %s\n\n", file.getPath());
 	}
 	
-	private static void printSubDir(PrintWriter out, File file) {
-		out.printf("Unterverzeichnis\t %s\n", file.getName());
+	private static void printSubDir(File file) {
+		System.out.printf("Unterverzeichnis\t %s\n", file.getName());
 	}
 	
-	private static void printFile(PrintWriter out, File file) {
-		out.printf("Datei\t\t\t %s\n", file.getName());
+	private static void printFile(File file) {
+		System.out.printf("Datei\t\t\t %s\n", file.getName());
 	}
 	
 }
