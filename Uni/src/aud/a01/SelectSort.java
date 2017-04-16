@@ -1,6 +1,8 @@
 package aud.a01;
 
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.Random;
 
 public class SelectSort {
 	
@@ -46,9 +48,22 @@ public class SelectSort {
 	}
 	
 	public static void main(String[] args) {
+		Instant start, end;
+		Long startLong, endLong;
+		Random random = new Random();
+		int[] testArray = new int[100000];
+		for(int i=0; i<100000; i++) {
+			testArray[i] = random.nextInt(1000000)-500000;
+		}
+		
+		start = Instant.now();
+		startLong = start.toEpochMilli();
 		SelectSort selectSort = new SelectSort();
-		int[] testArray = {-1, 1, 2, 3, -4, 8, 100};//{3, 4, 1, 34, 48, 2, 1};
+		
 		System.out.println(Arrays.toString(selectSort.sortArray(testArray)));
+		end = Instant.now();
+		endLong = end.toEpochMilli();
+		System.out.println("Verbrauchte Zeit für Sortieren und darstellen [ms]: " + (endLong-startLong));
 	}
 	
 }
