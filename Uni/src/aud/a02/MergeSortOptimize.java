@@ -61,14 +61,6 @@ public class MergeSortOptimize {
 		
 		MergeSortOptimize mergeSortOptimize = new MergeSortOptimize();
 		SelectSort selectSort = new SelectSort();
-	
-		start = Instant.now();
-		startLong = start.toEpochMilli();
-		System.out.println(Arrays.toString(mergeSortOptimize.sortArrayWithMergeSort(testArray)));
-		end = Instant.now();
-		endLong = end.toEpochMilli();
-		System.out.println("Verbrauchte Zeit für Sortieren und darstellen mit optimierten MergeSort [ms]: " + (endLong-startLong));
-		System.out.println();
 		
 		start = Instant.now();
 		startLong = start.toEpochMilli();
@@ -76,5 +68,13 @@ public class MergeSortOptimize {
 		end = Instant.now();
 		endLong = end.toEpochMilli();
 		System.out.println("Verbrauchte Zeit für Sortieren und darstellen mit SelectSort [ms]: " + (endLong-startLong));
+		System.out.println();
+		
+		start = Instant.now();
+		startLong = start.toEpochMilli();
+		System.out.println(Arrays.toString(mergeSortOptimize.sortArrayWithMergeSort(testArray)));
+		end = Instant.now();
+		endLong = end.toEpochMilli();
+		System.out.println("Verbrauchte Zeit für Sortieren und darstellen mit optimierten MergeSort [ms]: " + (endLong-startLong));
 	}
 }
