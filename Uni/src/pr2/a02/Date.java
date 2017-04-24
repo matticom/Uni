@@ -21,6 +21,8 @@ public class Date {
 		boolean ungueltigTag = true;
 		if (!ungueltigMonat) {
 			ungueltigTag = tag < 1 || tag > TAGE_IM_MONAT[monat];
+		} else {
+			ungueltigTag = tag < 1 || tag > 28;
 		}
 			
 		if ((ungueltigJahr && ungueltigMonat) || (ungueltigJahr && ungueltigTag) || (ungueltigMonat && ungueltigTag)) {

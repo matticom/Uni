@@ -45,7 +45,7 @@ public class MergeSortTest {
 		
 //		System.out.println(Arrays.toString(array));
 		System.out.println("Aktuelles Testarray: " + testArrayFile);
-		System.out.println("Verbrauchte Zeit für Sortieren mit optimiertem MergeSort [ms]: " + calNeededTime() + "\n");
+		System.out.println("Verbrauchte Zeit für Sortieren mit optimiertem MergeSort [ms]: " + neededTime() + "\n");
 		Assert.assertEquals(true, isSorted(array));
 	}
 	
@@ -66,7 +66,7 @@ public class MergeSortTest {
 		return objArray;
 	}
 	
-	private long calNeededTime() {
+	private long neededTime() {
 		return end.toEpochMilli()-start.toEpochMilli();
 	}
 	

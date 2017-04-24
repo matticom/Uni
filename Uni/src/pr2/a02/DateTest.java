@@ -10,7 +10,8 @@ public class DateTest {
 			{1, 5, 2013},	
 			{82, 38, 2013},
 			{5, 5, 3600},
-			{29, 2, 2016},
+			{28, 0, 2016},
+			{29, 0, 2016},
 			{28, 2, 2017}
 		};
 		PrintWriter out = new PrintWriter(System.out, true);
