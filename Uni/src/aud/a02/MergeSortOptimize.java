@@ -55,6 +55,7 @@ public class MergeSortOptimize {
 		Long startLong, endLong;
 		Random random = new Random();
 		int[] testArray = new int[100000];
+		
 		for(int i=0; i<100000; i++) {
 			testArray[i] = random.nextInt(1000000)-500000;
 		}
