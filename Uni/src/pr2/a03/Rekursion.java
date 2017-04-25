@@ -24,13 +24,10 @@ public class Rekursion {
 
 	public static int[] createArray(String file) {
 		
-		try (FileReader reader = new FileReader(file)){
-			Scanner in = new Scanner(reader);
-			int[] array = createArray(in);
-			in.close();
-			return array;
+		try (FileReader reader = new FileReader(file); Scanner in = new Scanner(reader)){
+			return createArray(in);
 		} catch (IOException e) {
-			System.out.println("Datei " +  file + "nicht gefunden");
+			System.out.println("Datei " +  file + " nicht gefunden");
 		}
 		return null;
 	}
@@ -61,15 +58,15 @@ public class Rekursion {
 	}
 
 	public static int indexOfRecursiv(int number, int[] array, int startIndex, int endIndex) {
-		
+		int midPosition = (endIndex+startIndex+1) / 2;
 		if (startIndex != endIndex) {
-			if (array[(startIndex+endIndex) / 2] == number) {
-				return (startIndex+endIndex) / 2;
+			if (array[midPosition] == number) {
+				return midPosition;
 			}
-			if (array[(startIndex+endIndex) / 2] > number) {
-				return indexOfRecursiv(number, array, startIndex, endIndex/2 - 1);
+			if (array[midPosition] > number) {
+				return indexOfRecursiv(number, array, startIndex, midPosition - 1);
 			} else {
-				return indexOfRecursiv(number, array, ((endIndex+startIndex) / 2) + 1, endIndex);
+				return indexOfRecursiv(number, array, midPosition + 1, endIndex);
 			}
 		} else {
 			if (array[startIndex] == number) {
@@ -81,19 +78,49 @@ public class Rekursion {
 	}
 
 	public void test() {
-
+		String str1 = "-3 19 23 28 40 56 84 102 111 130 144";
+		String str2 = "-3002 -34 0 9 13 38 43 1311 12330, 14487";
+		int[] str1Arr = createArrayDirectFrom(str1);
+		int[] str2Arr = createArrayDirectFrom(str2);
+		System.out.println("Test der Strings:");
+		print(str1Arr);
+		
+		for (int i = 0; i < str1Arr.length; i++) {
+			System.out.print(Rekursion.indexOfStandard(str1Arr[i], str1Arr) + " ");
+		}
+		System.out.println("\n");
+		print(str2Arr);
+		for (int i = 0; i < str2Arr.length; i++) {
+			System.out.print(Rekursion.indexOfStandard(str2Arr[i], str2Arr) + " ");
+		}
+		
+		print(str1Arr);
+		
+		for (int i = 0; i < str1Arr.length; i++) {
+			System.out.print(Rekursion.indexOfRecursiv(str1Arr[i], str1Arr) + " ");
+		}
+		System.out.println("\n");
+		print(str2Arr);
+		for (int i = 0; i < str2Arr.length; i++) {
+			System.out.print(Rekursion.indexOfRecursiv(str2Arr[i], str2Arr) + " ");
+		}
 	}
 
 	public void test(File dir) {
-
+		int[] strArr = createArray(dir.getPath());
+		System.out.println("\n\n\nTest der Datei:");
+		print(strArr);
+		
+		for (int i = 0; i < strArr.length; i++) {
+			System.out.print(Rekursion.indexOfStandard(strArr[i], strArr) + " ");
+			System.out.print(Rekursion.indexOfRecursiv(strArr[i], strArr) + " ");
+		}
 	}
 	
-	public static int numbersOfIntValues(Scanner in) {
-		int num = 0;
-		while (in.hasNextInt()) {
-			in.nextInt();
-			num++;
-		}
-		return num;
+	public static void main(String[] args) {
+		
+		Rekursion rekursion = new Rekursion();
+		rekursion.test();
+		rekursion.test(new File("./listen/intArray2.txt"));
 	}
 }

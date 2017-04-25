@@ -8,7 +8,10 @@ public class RekursionsTest {
 		Rekursion.print(array);
 		int[] array2 = Rekursion.createArrayDirectFrom("2 3");
 		Rekursion.print(array2);
-		System.out.println(Rekursion.indexOfRecursiv(102, array));
+		for (int i = 0; i < array.length; i++) {
+			System.out.println(Rekursion.indexOfRecursiv(array[i], array));
+		}
+		
 	}
 
 }
