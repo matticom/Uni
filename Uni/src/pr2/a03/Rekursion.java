@@ -10,11 +10,18 @@ import java.util.Scanner;
 
 public class Rekursion {
 	public static int[] createArray(Scanner in) {
+		return convertListToArray(scanIntValuesToList(in));
+	}
+	
+	private static List<Integer> scanIntValuesToList(Scanner in) {
 		List<Integer> arrayList = new ArrayList<Integer>();
 		while (in.hasNextInt()) {
 			arrayList.add(new Integer(in.nextInt()));
 		}
-		
+		return arrayList;
+	}
+	
+	private static int[] convertListToArray(List<Integer> arrayList) {
 		int[] array = new int[arrayList.size()];
 		for(int i = 0; i < arrayList.size(); i++){
 			array[i] = arrayList.get(i);
@@ -58,6 +65,9 @@ public class Rekursion {
 	}
 
 	public static int indexOfRecursiv(int number, int[] array, int startIndex, int endIndex) {
+		if (endIndex == -1) {
+			return -1;
+		}
 		int midPosition = (endIndex+startIndex+1) / 2;
 		if (startIndex != endIndex) {
 			if (array[midPosition] == number) {
@@ -82,24 +92,22 @@ public class Rekursion {
 		String str2 = "-3002 -34 0 9 13 38 43 1311 12330, 14487";
 		int[] str1Arr = createArrayDirectFrom(str1);
 		int[] str2Arr = createArrayDirectFrom(str2);
-		System.out.println("Test der Strings:");
+		System.out.println("Test der Strings:\n\nString1 mit Standardalgorithmus:");
 		print(str1Arr);
-		
 		for (int i = 0; i < str1Arr.length; i++) {
 			System.out.print(Rekursion.indexOfStandard(str1Arr[i], str1Arr) + " ");
 		}
-		System.out.println("\n");
+		System.out.println("\n\nString2 mit Standardalgorithmus:");
 		print(str2Arr);
 		for (int i = 0; i < str2Arr.length; i++) {
 			System.out.print(Rekursion.indexOfStandard(str2Arr[i], str2Arr) + " ");
 		}
-		
+		System.out.println("\n\nString1 mit binärem Suchalgorithmus:");
 		print(str1Arr);
-		
 		for (int i = 0; i < str1Arr.length; i++) {
 			System.out.print(Rekursion.indexOfRecursiv(str1Arr[i], str1Arr) + " ");
 		}
-		System.out.println("\n");
+		System.out.println("\n\nString2 mit binärem Suchalgorithmus:");
 		print(str2Arr);
 		for (int i = 0; i < str2Arr.length; i++) {
 			System.out.print(Rekursion.indexOfRecursiv(str2Arr[i], str2Arr) + " ");
@@ -108,19 +116,22 @@ public class Rekursion {
 
 	public void test(File dir) {
 		int[] strArr = createArray(dir.getPath());
-		System.out.println("\n\n\nTest der Datei:");
+		System.out.println("\n\n\nTest der Datei:\n");
 		print(strArr);
-		
+		System.out.println("\nDatei mit Standardalgorithmus:");
 		for (int i = 0; i < strArr.length; i++) {
 			System.out.print(Rekursion.indexOfStandard(strArr[i], strArr) + " ");
+		}
+		System.out.println("\n\nDatei mit binärem Suchalgorithmus:");
+		for (int i = 0; i < strArr.length; i++) {
 			System.out.print(Rekursion.indexOfRecursiv(strArr[i], strArr) + " ");
 		}
 	}
 	
 	public static void main(String[] args) {
-		
 		Rekursion rekursion = new Rekursion();
 		rekursion.test();
+		rekursion.test(new File("./listen/intArray.txt"));
 		rekursion.test(new File("./listen/intArray2.txt"));
 	}
 }
