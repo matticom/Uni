@@ -30,7 +30,6 @@ public class Rekursion {
 	}
 
 	public static int[] createArray(String file) {
-		
 		try (FileReader reader = new FileReader(file); Scanner in = new Scanner(reader)){
 			return createArray(in);
 		} catch (IOException e) {
@@ -126,12 +125,5 @@ public class Rekursion {
 		for (int i = 0; i < strArr.length; i++) {
 			System.out.print(Rekursion.indexOfRecursiv(strArr[i], strArr) + " ");
 		}
-	}
-	
-	public static void main(String[] args) {
-		Rekursion rekursion = new Rekursion();
-		rekursion.test();
-		rekursion.test(new File("./listen/intArray.txt"));
-		rekursion.test(new File("./listen/intArray2.txt"));
 	}
 }

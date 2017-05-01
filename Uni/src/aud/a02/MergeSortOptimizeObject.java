@@ -12,7 +12,7 @@ public class MergeSortOptimizeObject<T> {
 		this.array = array;
 		this.comparator = comparator;
 		int r = array.length-1;
-		auxArray = new Object[r+1];
+		auxArray = new Object[array.length];
 		
 		mergeSort(0, r);
 	}
