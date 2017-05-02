@@ -37,38 +37,48 @@ public class TreeFactory {
 		return null;
 	}
 	
-	private static QadTree createTree(String[] lines) {
-		QadTree myTree = null;
-		if (lines.length >= 1) {
-			Scanner in = new Scanner(lines[0]);
-			myTree = new QadTree(in.next());
-			in.close();
-		}
-		for(int i = 1; i < lines.length; i++) {
-			Scanner in = new Scanner(lines[i]);
-			String parent = "";
-			List<String> children = new ArrayList<String>();
-			boolean isParent = true;
-			while(in.hasNext()) {
-				if (isParent) {
-					parent = in.next();
-					isParent = false;
-				} else {
-					children.add(in.next());
-				}
-			}
-			in.close();
-			String[] childs = children.toArray(new String[children.size()]);
-			myTree.addChilds(parent, childs);
-		}
-		return myTree;
-	}
-	
-	public static String[] createArray(Scanner in) {
+	private static String[] createArray(Scanner in) {
 		List<String> arrayList = new ArrayList<String>();
 		while (in.hasNextLine()) {
 			arrayList.add(in.nextLine());
 		}
 		return arrayList.toArray(new String[arrayList.size()]);
+	}
+	
+	private static QadTree createTree(String[] lines) {
+		QadTree myTree = null;
+		if (lines.length >= 1) {
+			myTree = createTreeWithRootName(lines[0]);
+		}
+		for(int i = 1; i < lines.length; i++) {
+			List<String> childrenList = new ArrayList<String>();
+			String parent = extractSubTreeFromLine(childrenList, lines[i]);
+			String[] children = childrenList.toArray(new String[childrenList.size()]);
+			myTree.addChilds(parent, children);
+		}
+		return myTree;
+	}
+	
+	private static QadTree createTreeWithRootName(String rootName) {
+		Scanner in = new Scanner(rootName);
+		QadTree myTree = new QadTree(in.next());
+		in.close();
+		return myTree;
+	}
+	
+	private static String extractSubTreeFromLine(List<String> children, String line) {
+		Scanner in = new Scanner(line);
+		String parent = "";
+		boolean isParent = true;
+		while(in.hasNext()) {
+			if (isParent) {
+				parent = in.next();
+				isParent = false;
+			} else {
+				children.add(in.next());
+			}
+		}
+		in.close();
+		return parent;
 	}
 }
