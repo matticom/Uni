@@ -32,7 +32,7 @@ public class TreeFactory {
 		try (FileReader reader = new FileReader(new File(path)); Scanner in = new Scanner(reader)){
 			return createArray(in);
 		} catch (IOException e) {
-			System.out.println("Datei " +  path + " nicht gefunden");
+			System.err.println("Datei " +  path + " nicht gefunden");
 		}
 		return null;
 	}
