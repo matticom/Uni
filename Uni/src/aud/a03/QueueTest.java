@@ -33,7 +33,7 @@ public class QueueTest {
 		queue.printQueue();
 		queue.dequeue();
 		queue.printQueue();
-		queue.dequeue();
+//		queue.dequeue();
 	}
 
 }

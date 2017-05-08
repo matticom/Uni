@@ -26,14 +26,14 @@ public class Queue <T> {
 		this(10);
 	}
 	
-	// Queue-Methode: Laufzeit in O-Notation beträgt o(1), da alle Anweisungen der Methode o(1) haben
+	// Enqueue-Methode: Laufzeit in O-Notation beträgt o(1), da alle Anweisungen der Methode o(1) haben
 	public void enqueue(T obj) throws QueueOverflow {
 		if (queueIsFull) {
 			throw new QueueOverflow("Queue ist voll");
 		}
-		boolean noMoreSpaceAtArrayBoundary = (firstFreeIndex == LAST_ARRAY_INDEX && firstUsedIndex == 0);
-		boolean noMoreSpaceWithinArray = (firstFreeIndex == firstUsedIndex-1);
-		queueIsFull = noMoreSpaceAtArrayBoundary || noMoreSpaceWithinArray;
+		// Queue voll, wenn beide Zeiger nach enqueue auf gleichen Index zeigen 
+		// (Modulo-Funktion um Array als Ringspeicher zu betrachten)
+		queueIsFull = (firstUsedIndex == (firstFreeIndex+1) % size);
 		array[firstFreeIndex] = (T) obj;
 		firstFreeIndex = ++firstFreeIndex % size;
 		queueIsEmpty = false;
@@ -44,9 +44,9 @@ public class Queue <T> {
 		if (queueIsEmpty) {
 			throw new QueueUnderflow("Queue leer");
 		}
-		boolean noMoreElementAtArrayBoundary = (firstUsedIndex == LAST_ARRAY_INDEX && firstFreeIndex == 0);
-		boolean noMoreElementWithinArray = (firstUsedIndex == firstFreeIndex-1);
-		queueIsEmpty = noMoreElementAtArrayBoundary || noMoreElementWithinArray;
+		// Queue leer, wenn beide Zeiger nach dequeue auf gleichen Index zeigen 
+		// (Modulo-Funktion um Array als Ringspeicher zu betrachten)
+		queueIsEmpty = (firstFreeIndex == (firstUsedIndex+1) % size);
 		T dequeuedObject = (T) array[firstUsedIndex];
 		array[firstUsedIndex] = null;
 		firstUsedIndex = ++firstUsedIndex % size;
