@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public class MergeSortOptimizeObject<T> {
 	private Object[] auxArray;
+	private T[] auxArrayT;
 	private T[] array;
 	private Comparator<T> comparator;
 	
@@ -13,7 +14,7 @@ public class MergeSortOptimizeObject<T> {
 		this.comparator = comparator;
 		int r = array.length-1;
 		auxArray = new Object[array.length];
-		
+		auxArrayT = (T[]) new Object[array.length];
 		mergeSort(0, r);
 	}
 	
