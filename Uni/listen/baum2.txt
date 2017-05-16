@@ -1,8 +1,17 @@
-Deutschland
-Deutschland         Berlin              Bayern              Sachsen             Saarland            weitere             
-Berlin              Spandau             Wedding             Mitte               Treptow             
-Wedding             BeuthHochschule     U_Seestrasse        Müllerstrasse       
-BeuthHochschule     FB_Informatik       andereFB            
-Bayern              München             Altötting           Regensburg          
-München             Schwabing           Bayernstadion       DeutschesMuseum     
-DeutschesMuseum     Flugzeuge           Druckmaschinen      ZuseZ1              
+root
+root                A                   B                   C                   
+A                   A1                  A2                  
+A1                  A1a                 A1b                 
+A1a                 A1a1                A1a2                
+A2                  A2a                 A2b                 
+A2a                 A2a1                A2a2                
+B                   B1                  B2                  
+B1                  B1a                 B1b                 
+B1a                 B1a1                B1a2                
+B2                  B2a                 B2b                 
+B2a                 B2a1                B2a2                
+C                   C1                  C2                  
+C1                  C1a                 C1b                 
+C1a                 C1a1                C1a2                
+C2                  C2a                 C2b                 
+C2a                 C2a1                C2a2                

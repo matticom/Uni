@@ -15,7 +15,7 @@ import schimkat.berlin.lernhilfe2015ss.tree.QadTreeWalker;
 public class TreePrinterTest {
 
 	public static void main(String[] args) {
-		QadTree myTree = TreeFactory.createTree("./listen/tree-02.txt");
+		QadTree myTree = TreeFactory.createTree("./listen/baum.txt");
 		PrintWriter consoleOut = new PrintWriter(System.out, true);
 		Iterator<TreeNode> inorderIter = QadTreeWalker.inorderIterator(myTree);
 		Iterator<TreeNode> postorderIter = QadTreeWalker.postorderIterator(myTree);
