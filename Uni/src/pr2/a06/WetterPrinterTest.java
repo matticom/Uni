@@ -1,7 +1,7 @@
 package pr2.a06;
 
 import pr2.a06.util.Wetterzustand;
-import schimkat.berlin.lernhilfe2015ss.event.Timer;
+import schimkat.berlin.lernhilfe2017ss.event.Timer;
 
 public class WetterPrinterTest {
 

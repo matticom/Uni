@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.time.Instant;
 
-import pr2.a06.util.Wetterzustand;
-
 public class WetterPrinter implements ActionListener {
 
 	private long start;

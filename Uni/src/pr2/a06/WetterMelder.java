@@ -2,79 +2,43 @@ package pr2.a06;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.PrintWriter;
 
 import pr2.a06.util.Wetterzustand;
-import schimkat.berlin.lernhilfe2015ss.DIRTY.graphics.DirtyPainter;
-import schimkat.berlin.lernhilfe2015ss.event.weather.WeatherSymbol;
+import schimkat.berlin.lernhilfe2017ss.event.weather.WeatherSymbol;
+import schimkat.berlin.lernhilfe2017ss.graphics.DirtyPainter;
 
 public class WetterMelder implements ActionListener {
 
-	private WeatherSymbol recentSymbol;
 	private DirtyPainter dp;
-	private WeatherSymbol sonnig;
-	private WeatherSymbol bedeckt;
-	private WeatherSymbol wolkig;
-	private WeatherSymbol regen;
-	private WeatherSymbol gewitter;
+	private WeatherSymbol weatherSymbol;
 	
 	public WetterMelder() {
 		dp = new DirtyPainter();
-		sonnig = new WeatherSymbol(200, 200);
-		bedeckt = new WeatherSymbol(200, 200);
-		wolkig = new WeatherSymbol(200, 200);
-		regen = new WeatherSymbol(200, 200);
-		gewitter = new WeatherSymbol(200, 200);
-		dp.add(sonnig);
+		weatherSymbol = new WeatherSymbol(200, 200);
+		dp.add(weatherSymbol);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		dp.remove(recentSymbol);
 		switch (e.getActionCommand()) {
 		case Wetterzustand.SONNIG:
-			changeToSonnig();
+			weatherSymbol.changeToSunny();
 			break;
 		case Wetterzustand.BEDECKT:
-			changeToBedeckt();
+			weatherSymbol.changeToOvercast();
 			break;
 		case Wetterzustand.WOLKIG:
-			changeToWolkig();
+			weatherSymbol.changeToCloudy();
 			break;
 		case Wetterzustand.REGEN:
-			changeToRegen();
+			weatherSymbol.changeToRain();
 			break;
 		case Wetterzustand.GEWITTER:
-			changeToGewitter();
+			weatherSymbol.changeToTempest();
 			break;
 		default:
 			break;
 		}
 		dp.showDrawing();
-	}
-
-	public void changeToSonnig() {
-		dp.add(sonnig);
-		recentSymbol = sonnig;
-	}
-
-	public void changeToBedeckt() {
-		dp.add(bedeckt);
-		recentSymbol = bedeckt;
-	}
-
-	public void changeToWolkig() {
-		dp.add(wolkig);
-		recentSymbol = wolkig;
-	}
-
-	public void changeToRegen() {
-		dp.add(regen);
-		recentSymbol = regen;
-	}
-
-	public void changeToGewitter() {
-		dp.add(gewitter);
-		recentSymbol = gewitter;
 	}
 }
