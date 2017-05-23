@@ -11,12 +11,11 @@ public class WetterAnsicht implements PropertyChangeListener {
 	private WeatherSymbol weatherSymbol;
 	private WetterModel wetterModel;
 
-	public WetterAnsicht(WetterModel wetterModel) {
+	public WetterAnsicht(WetterModel wetterModel) { // Besser per Konstruktor , Event zu groﬂ und Model <-> Viewer ist verbunden
 		dp = new DirtyPainter();
 		weatherSymbol = new WeatherSymbol(200, 200);
 		dp.add(weatherSymbol);
 		this.wetterModel = wetterModel;
-		dp.showDrawing();
 	}
 
 	@Override
