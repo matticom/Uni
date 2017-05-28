@@ -10,8 +10,7 @@ public class WetterPrinter implements ActionListener {
 	private long start;
 	
 	public WetterPrinter() {
-		Instant startTime = Instant.now();
-		start = startTime.toEpochMilli();
+		start = Instant.now().toEpochMilli();
 	}
 
 	@Override
@@ -19,5 +18,4 @@ public class WetterPrinter implements ActionListener {
 		PrintWriter out = new PrintWriter(System.out, true);
 		out.printf("Wetternachricht um %10d[ms]: %12s\n", e.getWhen()-start, e.getActionCommand());
 	}
-
 }

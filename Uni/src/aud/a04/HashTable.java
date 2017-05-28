@@ -18,16 +18,15 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		int idxKey = hashFunction(key);
 		KeyValuePair<K, V> newEntry = new KeyValuePair<K, V>(key, value);
+		int idxKey = hashFunction(key);
 		List<KeyValuePair<K, V>> bucketList = (List<KeyValuePair<K, V>>) array[idxKey];
 		if (bucketList != null) {
-			V oldValue = get(key);
-			if (oldValue != null) {
-				KeyValuePair<K, V> existedEntry = getListEntry(bucketList, key);
+			KeyValuePair<K, V> existedEntry = getListEntry(bucketList, key);
+			if (existedEntry != null) {
 				bucketList.remove(existedEntry);
 				bucketList.add(newEntry);
-				return oldValue;
+				return existedEntry.getValue();
 			}
 		} else {
 			bucketList = new LinkedList<KeyValuePair<K, V>>();
@@ -40,7 +39,7 @@ public class HashTable<K, V> implements Map<K, V> {
 		}
 		return null;
 	}
-
+			
 	@Override
 	public V get(K key) {
 		int idxKey = hashFunction(key);
@@ -59,12 +58,11 @@ public class HashTable<K, V> implements Map<K, V> {
 		int idxKey = hashFunction(key);
 		List<KeyValuePair<K, V>> bucketList = (List<KeyValuePair<K, V>>) array[idxKey];
 		if (bucketList != null) {
-			V oldValue = get(key);
-			if (oldValue != null) {
-				KeyValuePair<K, V> existedEntry = getListEntry(bucketList, key);
+			KeyValuePair<K, V> existedEntry = getListEntry(bucketList, key);
+			if (existedEntry != null) {
 				bucketList.remove(existedEntry);
 				occupancy.removeKey();
-				return oldValue;
+				return existedEntry.getValue();
 			}
 		}
 		return null;

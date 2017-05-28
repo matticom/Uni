@@ -22,13 +22,15 @@ public class HashTableTest {
 	}
 	
 	@Test
-	public void testPutInNewKeyValuePair() {
+	public void testPutNewKeyValuePair() {
+		System.out.println("Put Aktionstest (neue Werte in HashTable):");
 		hTable.printHashTable();
 		Assert.assertEquals("value sechs", hTable.get("sechs"));
 	}
 	
 	@Test
 	public void testRemoveKey() {
+		System.out.println("Remove Aktionstest (nicht - / vorhandener Key gelöscht):");
 		String retValue = hTable.remove("sechs");
 		String retValue2 = hTable.remove("sec");
 		hTable.printHashTable();
@@ -39,6 +41,7 @@ public class HashTableTest {
 
 	@Test
 	public void testOverrideKey() {
+		System.out.println("Put Überschreiben-Aktionstest (value acht wird überschrieben):");
 		String retValue = hTable.put("acht", "neue acht");
 		hTable.printHashTable();
 		Assert.assertEquals("value acht", retValue);
@@ -46,6 +49,7 @@ public class HashTableTest {
 	
 	@Test
 	public void testOccupationExceed() {
+		System.out.println("Erweiterung-Aktionstest (bei überschrittener Auslastung der HashTable):");
 		hTable.printCurrentOccupancy();
 		hTable.put("zehn", "value zehn");
 		System.out.println("\nNach Einfügen eines neuen Schlüssels und der damit erzwungenen Erweiterung des Arrays: ");
