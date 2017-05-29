@@ -22,8 +22,8 @@ public class HashTable<K, V> implements Map<K, V> {
 	public V put(K key, V value) {
 		KeyValuePair<K, V> newKVPair = new KeyValuePair<K, V>(key, value);
 		int keyIdx = hashFunction(key);
-		if (bucketListAvailableAtArray(keyIdx)) {
-			if (keyAvailableInBucketList(key)) {
+		if (anyBucketListAlreadyExistsAtArrayIndex(keyIdx)) {
+			if (keyIsAlreadyInBucketList(key)) {
 				bucketList.remove(existingKVPair);
 				bucketList.add(newKVPair);
 				return existingKVPair.getValue();
@@ -39,14 +39,12 @@ public class HashTable<K, V> implements Map<K, V> {
 		}
 		return null;
 	}
-	
-	
 			
 	@Override
 	public V get(K key) {
 		int keyIdx = hashFunction(key);
-		if (bucketListAvailableAtArray(keyIdx)) {
-			if (keyAvailableInBucketList(key)) {
+		if (anyBucketListAlreadyExistsAtArrayIndex(keyIdx)) {
+			if (keyIsAlreadyInBucketList(key)) {
 				return existingKVPair.getValue();
 			}
 		}
@@ -56,8 +54,8 @@ public class HashTable<K, V> implements Map<K, V> {
 	@Override
 	public V remove(K key) {
 		int keyIdx = hashFunction(key);
-		if (bucketListAvailableAtArray(keyIdx)) {
-			if (keyAvailableInBucketList(key)) {
+		if (anyBucketListAlreadyExistsAtArrayIndex(keyIdx)) {
+			if (keyIsAlreadyInBucketList(key)) {
 				bucketList.remove(existingKVPair);
 				occupancy.removeKey();
 				return existingKVPair.getValue();
@@ -70,12 +68,12 @@ public class HashTable<K, V> implements Map<K, V> {
 		return Math.abs(key.hashCode() % arraySize);
 	}
 	
-	private boolean bucketListAvailableAtArray(int idxKey) {
+	private boolean anyBucketListAlreadyExistsAtArrayIndex(int idxKey) {
 		bucketList = (List<KeyValuePair<K, V>>) array[idxKey];
 		return (bucketList != null) ? true  : false;
 	}
 	
-	private boolean keyAvailableInBucketList(K key) {
+	private boolean keyIsAlreadyInBucketList(K key) {
 		existingKVPair = getListEntry(bucketList, key);
 		return (existingKVPair != null) ? true : false;
 	}
