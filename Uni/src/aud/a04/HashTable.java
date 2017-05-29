@@ -74,11 +74,11 @@ public class HashTable<K, V> implements Map<K, V> {
 	}
 	
 	private boolean keyIsAlreadyInBucketList(K key) {
-		existingKVPair = getListEntry(bucketList, key);
+		existingKVPair = getKVPairFromList(bucketList, key);
 		return (existingKVPair != null) ? true : false;
 	}
 
-	private KeyValuePair<K, V> getListEntry(List<KeyValuePair<K, V>> bucketList, K key) {
+	private KeyValuePair<K, V> getKVPairFromList(List<KeyValuePair<K, V>> bucketList, K key) {
 		for (KeyValuePair<K, V> entry : bucketList) {
 			if (entry.getKey().equals(key)) {
 				return entry;
