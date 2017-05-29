@@ -9,7 +9,7 @@ public class HashTable<K, V> implements Map<K, V> {
 	protected int arraySize;
 	protected Occupancy occupancy;
 	protected final double ARRAY_EXTENSION_FACTOR = 2.75;
-	protected KeyValuePair<K, V> existedEntry;
+	protected KeyValuePair<K, V> existingKVPair;
 	protected List<KeyValuePair<K, V>> bucketList;
 	
 	public HashTable(int arraySize) {
@@ -20,18 +20,18 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		KeyValuePair<K, V> newEntry = new KeyValuePair<K, V>(key, value);
+		KeyValuePair<K, V> newKVPair = new KeyValuePair<K, V>(key, value);
 		int keyIdx = hashFunction(key);
 		if (bucketListAvailableAtArray(keyIdx)) {
 			if (keyAvailableInBucketList(key)) {
-				bucketList.remove(existedEntry);
-				bucketList.add(newEntry);
-				return existedEntry.getValue();
+				bucketList.remove(existingKVPair);
+				bucketList.add(newKVPair);
+				return existingKVPair.getValue();
 			}
 		} else {
 			bucketList = new LinkedList<KeyValuePair<K, V>>();
 		}
-		bucketList.add(newEntry);
+		bucketList.add(newKVPair);
 		occupancy.addKey();
 		array[keyIdx] = bucketList;
 		if (occupancy.maxOccupancyExceeded()) {
@@ -47,7 +47,7 @@ public class HashTable<K, V> implements Map<K, V> {
 		int keyIdx = hashFunction(key);
 		if (bucketListAvailableAtArray(keyIdx)) {
 			if (keyAvailableInBucketList(key)) {
-				return existedEntry.getValue();
+				return existingKVPair.getValue();
 			}
 		}
 		return null;
@@ -58,9 +58,9 @@ public class HashTable<K, V> implements Map<K, V> {
 		int keyIdx = hashFunction(key);
 		if (bucketListAvailableAtArray(keyIdx)) {
 			if (keyAvailableInBucketList(key)) {
-				bucketList.remove(existedEntry);
+				bucketList.remove(existingKVPair);
 				occupancy.removeKey();
-				return existedEntry.getValue();
+				return existingKVPair.getValue();
 			}
 		}
 		return null;
@@ -76,8 +76,8 @@ public class HashTable<K, V> implements Map<K, V> {
 	}
 	
 	private boolean keyAvailableInBucketList(K key) {
-		existedEntry = getListEntry(bucketList, key);
-		return (existedEntry != null) ? true : false;
+		existingKVPair = getListEntry(bucketList, key);
+		return (existingKVPair != null) ? true : false;
 	}
 
 	private KeyValuePair<K, V> getListEntry(List<KeyValuePair<K, V>> bucketList, K key) {
