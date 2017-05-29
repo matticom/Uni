@@ -9,6 +9,8 @@ public class HashTable<K, V> implements Map<K, V> {
 	protected int arraySize;
 	protected Occupancy occupancy;
 	protected final double ARRAY_EXTENSION_FACTOR = 2.75;
+	protected KeyValuePair<K, V> existedEntry;
+	protected List<KeyValuePair<K, V>> bucketList;
 	
 	public HashTable(int arraySize) {
 		this.arraySize = arraySize;
@@ -19,11 +21,9 @@ public class HashTable<K, V> implements Map<K, V> {
 	@Override
 	public V put(K key, V value) {
 		KeyValuePair<K, V> newEntry = new KeyValuePair<K, V>(key, value);
-		int idxKey = hashFunction(key);
-		List<KeyValuePair<K, V>> bucketList = (List<KeyValuePair<K, V>>) array[idxKey];
-		if (bucketList != null) {
-			KeyValuePair<K, V> existedEntry = getListEntry(bucketList, key);
-			if (existedEntry != null) {
+		int keyIdx = hashFunction(key);
+		if (bucketListAvailableAtArray(keyIdx)) {
+			if (keyAvailableInBucketList(key)) {
 				bucketList.remove(existedEntry);
 				bucketList.add(newEntry);
 				return existedEntry.getValue();
@@ -33,20 +33,20 @@ public class HashTable<K, V> implements Map<K, V> {
 		}
 		bucketList.add(newEntry);
 		occupancy.addKey();
-		array[idxKey] = bucketList;
+		array[keyIdx] = bucketList;
 		if (occupancy.maxOccupancyExceeded()) {
 			extendArray();
 		}
 		return null;
 	}
+	
+	
 			
 	@Override
 	public V get(K key) {
-		int idxKey = hashFunction(key);
-		List<KeyValuePair<K, V>> bucketList = (List<KeyValuePair<K, V>>) array[idxKey];
-		if (bucketList != null) {
-			KeyValuePair<K, V> existedEntry = getListEntry(bucketList, key);
-			if (existedEntry != null) {
+		int keyIdx = hashFunction(key);
+		if (bucketListAvailableAtArray(keyIdx)) {
+			if (keyAvailableInBucketList(key)) {
 				return existedEntry.getValue();
 			}
 		}
@@ -55,11 +55,9 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V remove(K key) {
-		int idxKey = hashFunction(key);
-		List<KeyValuePair<K, V>> bucketList = (List<KeyValuePair<K, V>>) array[idxKey];
-		if (bucketList != null) {
-			KeyValuePair<K, V> existedEntry = getListEntry(bucketList, key);
-			if (existedEntry != null) {
+		int keyIdx = hashFunction(key);
+		if (bucketListAvailableAtArray(keyIdx)) {
+			if (keyAvailableInBucketList(key)) {
 				bucketList.remove(existedEntry);
 				occupancy.removeKey();
 				return existedEntry.getValue();
@@ -70,6 +68,16 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	private int hashFunction(K key) {
 		return Math.abs(key.hashCode() % arraySize);
+	}
+	
+	private boolean bucketListAvailableAtArray(int idxKey) {
+		bucketList = (List<KeyValuePair<K, V>>) array[idxKey];
+		return (bucketList != null) ? true  : false;
+	}
+	
+	private boolean keyAvailableInBucketList(K key) {
+		existedEntry = getListEntry(bucketList, key);
+		return (existedEntry != null) ? true : false;
 	}
 
 	private KeyValuePair<K, V> getListEntry(List<KeyValuePair<K, V>> bucketList, K key) {
