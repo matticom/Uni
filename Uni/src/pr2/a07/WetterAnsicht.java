@@ -2,11 +2,11 @@ package pr2.a07;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import schimkat.berlin.lernhilfe2017ss.event.weather.WeatherSymbol;
 import schimkat.berlin.lernhilfe2017ss.graphics.DirtyPainter;
 
 public class WetterAnsicht implements PropertyChangeListener {
+	// ein View hat immer ein Model, ein Model kann mehrere Views habn
 	private DirtyPainter dp;
 	private WeatherSymbol weatherSymbol;
 	private WetterModel wetterModel;

@@ -3,7 +3,7 @@ package pr1.a08;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import schimkat.berlin.lernhilfe2016ws.graphics.Drawable;
+import schimkat.berlin.lernhilfe2017ss.graphics.Drawable;
 
 public class RotatingPoint extends Point implements ChangingWithTime, Drawable{
 

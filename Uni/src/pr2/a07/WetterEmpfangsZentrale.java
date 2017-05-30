@@ -15,5 +15,4 @@ public class WetterEmpfangsZentrale implements ActionListener {
 		pr2.a07e.Wetterzustand wetterzustand = pr2.a07e.Wetterzustand.valueOf(e.getActionCommand());
 		wetterModel.setWetter(wetterzustand);
 	}
-
 }
