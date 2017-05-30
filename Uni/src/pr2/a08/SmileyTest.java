@@ -13,25 +13,34 @@ public class SmileyTest {
 		dp.add(smiley);
 		dp.showDrawing();
 		int i = 0;
+		int j = 0;
 		while (true) {
+			j = i % 100;
 			i++;
+			if (j == 0) {
+				kopfRadius = 400;
+				smiley.setPosition(0, 0);
+			}
 			smiley.setAugapfelWinkel(augapfelWinkel);
 			augapfelWinkel += Math.PI/6;
 			smiley.setLaecheln(laecheln);
 			laecheln = !laecheln;
 			smiley.setKopfRadius(kopfRadius);
-			kopfRadius -= 2;
-			if (i == 20) {
-				augenKopfProzent = 10;
+			kopfRadius -= 3;
+			if (j == 20) {
+				smiley.setPosition(100, 100);
+				augenKopfProzent = 13;
 				smiley.setAugenKopfProzent(augenKopfProzent);
-				System.out.println("augenKopfProzent = 10");
+				System.out.println("augenKopfProzent = 13");
 			}
-			if (i == 30) {
+			if (j == 30) {
 				augenKopfProzent = 20;
+				smiley.moveRelativ(50, 50);
 				smiley.setAugenKopfProzent(augenKopfProzent);
 				System.out.println("augenKopfProzent = 20");
 			}
 			System.out.println(i);
+			
 			dp.showDrawingAfterWaiting(200);
 		}
 	}

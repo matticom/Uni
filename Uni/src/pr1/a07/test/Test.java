@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import pr1.a07.Gitter;
 import schimkat.berlin.lernhilfe2016ws.graphics.DirtyPainter;
-import schimkat.berlin.lernhilfe2016ws.graphics.DirtyPainterTest;
 
 public class Test {
 

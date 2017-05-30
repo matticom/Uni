@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import pr1.a08.ChangingWithTime;
-import schimkat.berlin.lernhilfe2016ws.graphics.Drawable;
+import schimkat.berlin.lernhilfe2017ss.graphics.Drawable;
 
 public class Sonne implements ChangingWithTime, Drawable {
 

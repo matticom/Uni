@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Map;
 
-import schimkat.berlin.lernhilfe2016ws.graphics.Drawable;
+import schimkat.berlin.lernhilfe2017ss.graphics.Drawable;
 
 public final class ColorTable implements Drawable {
 

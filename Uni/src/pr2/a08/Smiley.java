@@ -39,8 +39,8 @@ public class Smiley implements Drawable {
 		int xPos_linkes_Auge = (int) (kopfRadius / 2);
 		int xPos_rechtes_Auge = (int) (3 * kopfRadius / 2);
 		int yPos_Augen = (int) (4 * kopfRadius / 5);
-		Point linkes_Auge = new Point(xPos_linkes_Auge, yPos_Augen);
-		Point rechtes_Auge = new Point(xPos_rechtes_Auge, yPos_Augen);
+		Point linkes_Auge = new Point(x + xPos_linkes_Auge, y + yPos_Augen);
+		Point rechtes_Auge = new Point(x + xPos_rechtes_Auge, y + yPos_Augen);
 		drawKopf(g);
 		drawAugen(g, linkes_Auge, rechtes_Auge);
 		drawAugaepfel(g, linkes_Auge, rechtes_Auge);
@@ -82,11 +82,11 @@ public class Smiley implements Drawable {
 			int breite_Mund = xPos_rechter_Mund - xPos_linker_Mund;
 			int hoehe_Mund = (int) (9*kopfRadius/5 - yPos_Mund);
 			g.setColor(Color.RED);
-			g.fillArc(xPos_linker_Mund, yPos_Mund, breite_Mund, hoehe_Mund, 180, 180);
+			g.fillArc(x + xPos_linker_Mund, y + yPos_Mund, breite_Mund, hoehe_Mund, 180, 180);
 		} else {
 			int yPos_Mund = (int) (7 * kopfRadius / 5);
 			g.setColor(Color.RED);
-			g.drawLine(xPos_linker_Mund, yPos_Mund, xPos_rechter_Mund, yPos_Mund);
+			g.drawLine(x + xPos_linker_Mund, y + yPos_Mund, x + xPos_rechter_Mund, y + yPos_Mund);
 		}
 	}
 
@@ -99,8 +99,8 @@ public class Smiley implements Drawable {
 	}
 
 	public void moveRelativ(int dx, int dy) {
-		x = x - dx;
-		y = y - dy;
+		x += dx;
+		y += dy;
 	}
 
 	public void setPosition(int x, int y) {

@@ -1,6 +1,6 @@
 package pr1.a09;
 
-import schimkat.berlin.lernhilfe2016ws.graphics.DirtyPainter;
+import schimkat.berlin.lernhilfe2017ss.graphics.DirtyPainter;
 
 public class ParkTest {
 

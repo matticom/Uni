@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import pr1.a08.ChangingWithTime;
-import schimkat.berlin.lernhilfe2016ws.graphics.Drawable;
+import schimkat.berlin.lernhilfe2017ss.graphics.Drawable;
 
 public class Park implements Drawable, ChangingWithTime {
 	
