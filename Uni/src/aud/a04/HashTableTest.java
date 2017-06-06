@@ -5,7 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class HashTableTest {
+		
 	private HashTable<String, String> hTable;
+	
+	/**
+	 * Initialisierung und Befüllung der HashTable
+	 * (wird automatisch vor jedem einzelnen Test durchgeführt)
+	 */
 	
 	@Before
 	public void setUp() {
@@ -21,6 +27,11 @@ public class HashTableTest {
 		hTable.put("neun", "value neun");
 	}
 	
+	/**
+	 * Test, ob neues Schlüssel-Wert-Paar eingefügt wurde bei setUp()
+	 * -> Methode put(...) wird getestet (Stichprobentest)
+	 */
+	
 	@Test
 	public void testPutNewKeyValuePair() {
 		System.out.println("Put Aktionstest (neue Werte in HashTable):");
@@ -28,9 +39,14 @@ public class HashTableTest {
 		Assert.assertEquals("value sechs", hTable.get("sechs"));
 	}
 	
+	/**
+	 * Test, ob Schlüssel-Wert-Paar nur löscht wird, wenn Schlüssel
+	 * vorhanden ist, und sonst im anderen Fall null zurück gibt
+	 */
+	
 	@Test
 	public void testRemoveKey() {
-		System.out.println("Remove Aktionstest (nicht - / vorhandener Key gelöscht):");
+		System.out.println("Remove Aktionstest (vorhandener / nicht vorhandener Key gelöscht):");
 		String retValue = hTable.remove("sechs");
 		String retValue2 = hTable.remove("sec");
 		hTable.printHashTable();
@@ -39,13 +55,24 @@ public class HashTableTest {
 		Assert.assertEquals(null, retValue2);
 	}
 
+	/**
+	 * Test, ob Schlüssel-Wert-Paar überschrieben wird und falls, dass
+	 * der alte Value des überschriebenen Schlüssel zurückgegeben wird
+	 */
+	
 	@Test
 	public void testOverrideKey() {
-		System.out.println("Put Überschreiben-Aktionstest (value acht wird überschrieben):");
+		System.out.println("Put überschreiben-Aktionstest (value acht wird überschrieben):");
 		String retValue = hTable.put("acht", "neue acht");
 		hTable.printHashTable();
 		Assert.assertEquals("value acht", retValue);
+		Assert.assertEquals("neue acht", hTable.get("acht"));
 	}
+	
+	/**
+	 * Test, ob maximaler Belegungsgrad, wie definiert, erreicht wird und automatisch
+	 * das Array vergrößert wird um den definierten Faktor 
+	 */
 	
 	@Test
 	public void testOccupationExceed() {

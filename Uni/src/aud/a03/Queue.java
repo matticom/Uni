@@ -50,6 +50,11 @@ public class Queue <T> {
 		return dequeuedObject;
 	}
 	
+	public boolean isNotEmpty() {
+		return !queueIsEmpty;
+	}
+	
+	
 	public void printQueue() {
 		System.out.println(Arrays.toString(array));
 	}
