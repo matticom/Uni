@@ -6,7 +6,7 @@ package aud.a05;
  * @version 1.0
  * @param <V> eine Unterklasse der Knotenklasse Vertex zur Repräsentation der Endknoten der Kante
  */
-public class Edge <V extends Vertex> {
+public class Edge <V extends MyVertex> {
 	private V vertexA;
 	private V vertexB;
 	private int weight = 1;

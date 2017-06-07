@@ -9,7 +9,7 @@ import java.util.*;
  * @param <V> eine Unterklasse der Klasse Vertex fuer Knoten eines Graphen
  * @param <E> eine Unterklasse der Klasse Edge<V> fuer die Kanten eines Graphen
  */
-public class Graph <V extends Vertex, E extends Edge<V>> {
+public class Graph <V extends MyVertex, E extends Edge<V>> {
 	private HashMap<Integer, Integer> vertexIndex;
 		// gibt zu einer Knoten-Id den Index an, an dem der Knoten in vertices
 		// und die inzidenten Kanten in adjList abgelegt ist
@@ -66,8 +66,8 @@ public class Graph <V extends Vertex, E extends Edge<V>> {
 
 		// Jede Kante e = (a,b) in die Adjazenzliste des Knoten a einfuegen
 		for (E e: edgeset) {
-			Vertex a = e.getVertexA();
-			Vertex b = e.getVertexB();
+			MyVertex a = e.getVertexA();
+			MyVertex b = e.getVertexB();
 			Integer IIndA = vertexIndex.get(a.getId());
 			if (IIndA== null)
 				throw new RuntimeException("Knoten a der Kante ex. nicht");
@@ -284,8 +284,8 @@ public class Graph <V extends Vertex, E extends Edge<V>> {
 	 * @return true g.d.w. Kante entfernt werden konnte
 	 */
 	public boolean removeEdge(E e) {
-		Vertex a = e.getVertexA();
-		Vertex b = e.getVertexB();
+		MyVertex a = e.getVertexA();
+		MyVertex b = e.getVertexB();
 
 		// Achtung: Modifikationen sind notwendig, wenn bei ungerichteten
 		// Graphen eine Kante {a, b} nur einmal existiert und sowohl in

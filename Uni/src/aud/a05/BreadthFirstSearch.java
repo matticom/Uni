@@ -10,13 +10,13 @@ import aud.a03.QueueUnderflow;
 
 public class BreadthFirstSearch {
 
-	protected Queue<Vertex> queue;
-	protected Graph<Vertex, Edge<Vertex>> graph;
-	protected Vertex startVertex;
+	protected Queue<MyVertex> queue;
+	protected Graph<MyVertex, Edge<MyVertex>> graph;
+	protected MyVertex startVertex;
 	
-	private BreadthFirstSearch(Graph<Vertex, Edge<Vertex>> graph, int startId) throws QueueOverflow, QueueUnderflow {
+	private BreadthFirstSearch(Graph<MyVertex, Edge<MyVertex>> graph, int startId) throws QueueOverflow, QueueUnderflow {
 		this.graph = graph;
-		queue = new Queue<Vertex>(100);
+		queue = new Queue<MyVertex>(100);
 		initializeBFS(startId);
 		breadthSearchAlgorithms();
 	}
@@ -31,8 +31,8 @@ public class BreadthFirstSearch {
 	
 	protected void breadthSearchAlgorithms() throws QueueUnderflow, QueueOverflow {
 		while (queue.isNotEmpty()) {
-			Vertex currentVertex = queue.dequeue();
-			for (Vertex neighbour: graph.getNeighbours(currentVertex)) {
+			MyVertex currentVertex = queue.dequeue();
+			for (MyVertex neighbour: graph.getNeighbours(currentVertex)) {
 				if (neighbour.getVisitStatus() == VisitStatus.NOT_VISIT) {
 					neighbour.setVisitStatus(VisitStatus.NEIGHBOURS_NOT_VISIT);
 					neighbour.setDistance(currentVertex.getDistance()+1);
@@ -44,36 +44,36 @@ public class BreadthFirstSearch {
 		}
 	}
 	
-	public static int getShortestDistanceBetween(int startVertexId, int otherVertexId, Graph<Vertex, Edge<Vertex>> graph) throws QueueOverflow, QueueUnderflow {
+	public static int getShortestDistanceBetween(int startVertexId, int otherVertexId, Graph<MyVertex, Edge<MyVertex>> graph) throws QueueOverflow, QueueUnderflow {
 		BreadthFirstSearch bfs = new BreadthFirstSearch(graph, startVertexId);
 		return bfs.graph.getVertex(otherVertexId).getDistance();
 	}
 	
-	public static List<Integer> getShortestWayBetween(int vertexId1, int vertexId2, Graph<Vertex, Edge<Vertex>> graph) throws QueueOverflow, QueueUnderflow {
+	public static List<MyVertex> getShortestWayBetween(int vertexId1, int vertexId2, Graph<MyVertex, Edge<MyVertex>> graph) throws QueueOverflow, QueueUnderflow {
 		BreadthFirstSearch bfs = new BreadthFirstSearch(graph, vertexId1);
-		List<Integer> verticesPath = new ArrayList<Integer>();
+		List<MyVertex> verticesPath = new ArrayList<MyVertex>();
 		
 		if (vertexId1 == vertexId2) {
-			verticesPath.add(vertexId1);
+			verticesPath.add(bfs.graph.getVertex(vertexId1));
 			return verticesPath;
 		}
 		
-		Vertex startVertex = bfs.graph.getVertex(vertexId1);
-		Vertex endVertex = bfs.graph.getVertex(vertexId2);
-		Vertex predecessor = endVertex.getPredecessors();
+		MyVertex startVertex = bfs.graph.getVertex(vertexId1);
+		MyVertex endVertex = bfs.graph.getVertex(vertexId2);
+		MyVertex predecessor = endVertex.getPredecessors();
 		
 		if (predecessor == null) {
-			verticesPath.add(Integer.MAX_VALUE);
+			verticesPath.add(new MyVertex(Integer.MAX_VALUE));
 			return verticesPath;
 		}
-		verticesPath.add(endVertex.getId());
+		verticesPath.add(endVertex);
 		
 		while (!predecessor.equals(startVertex)){
-			verticesPath.add(predecessor.getId());
+			verticesPath.add(predecessor);
 			predecessor = predecessor.getPredecessors();
 		}
 		// predecessor == startVertex
-		verticesPath.add(predecessor.getId());
+		verticesPath.add(predecessor);
 		Collections.reverse(verticesPath);
 		return verticesPath;
 	}
