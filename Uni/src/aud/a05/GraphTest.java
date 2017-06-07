@@ -9,10 +9,10 @@ public class GraphTest {
 
 	public static void main(String[] args) throws QueueOverflow, QueueUnderflow {
 		String graph = "./src/aud/a05/GraphBeispiele/graph8.txt";
-		Graph<MyVertex, Edge<MyVertex>> graph8 = GraphLesen.FileToGraph(graph, false);
+		Graph<MyVertex, Edge<MyVertex>> graph8 = GraphLesen.FileToGraph(graph, true);
 		System.out.println(graph8.toString());
-		printShortestDistanceBetween(5, 8, graph8);
-		graph8 = GraphLesen.FileToGraph(graph, false);
+		printShortestDistanceBetween(8, 5, graph8);
+		graph8 = GraphLesen.FileToGraph(graph, true);
 		printPathBetween(1, 8, graph8);
 	}
 
@@ -29,7 +29,7 @@ public class GraphTest {
 	}
 
 	public static void printPathBetween(int vertexId1, int vertexId2, Graph<MyVertex, Edge<MyVertex>> graph) throws QueueOverflow, QueueUnderflow {
-		List<MyVertex> pathList = BreadthFirstSearch.getShortestWayBetween(vertexId1, vertexId2, graph);
+		List<MyVertex> pathList = BreadthFirstSearch.getShortestPathBetween(vertexId1, vertexId2, graph);
 		System.out.printf("Der Weg von %d nach %d:     ", vertexId1, vertexId2);
 		for (MyVertex v : pathList) {
 			int value = v.getId();
