@@ -1,9 +1,7 @@
 package aud.a05;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,8 +10,6 @@ import aud.a03.QueueUnderflow;
 
 public class BreadthFirstSearchTest {
 		
-	private List<MyVertex> pathList;
-	private int shortestDistance;
 	private Graph<MyVertex, Edge<MyVertex>> graph8_Directed;
 	private Graph<MyVertex, Edge<MyVertex>> graph20_Directed;
 	private Graph<MyVertex, Edge<MyVertex>> graph20_Undirected;

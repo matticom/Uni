@@ -7,9 +7,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Rekursion {
 	public static int[] createArray(Scanner in) {
+//		int integ = in.nextInt();
+//		int[] numbers = IntStream.range(0, integ).map(i -> in.nextInt()).toArray();
+		
+		
+//		List<Integer> list = new ArrayList<>();
+//
+//        list = IntStream.range(0,in.nextInt()).map(i -> in.nextInt()).boxed().collect(Collectors.toList());
+//        System.out.println(list);
+//		return convertListToArray(list);
+		
+		
 		return convertListToArray(scanIntValuesToList(in));
 	}
 	
@@ -22,11 +35,12 @@ public class Rekursion {
 	}
 	
 	private static int[] convertListToArray(List<Integer> arrayList) {
-		int[] array = new int[arrayList.size()];
-		for(int i = 0; i < arrayList.size(); i++){
-			array[i] = arrayList.get(i);
-		}
-		return array;
+//		int[] array = new int[arrayList.size()];
+//		for(int i = 0; i < arrayList.size(); i++){
+//			array[i] = arrayList.get(i);
+//		}
+//		return array;
+		return arrayList.stream().mapToInt(i->i).toArray();
 	}
 
 	public static int[] createArray(String file) {
