@@ -49,7 +49,7 @@ public class BreadthFirstSearch {
 		return bfs.graph.getVertex(otherVertexId).getDistance();
 	}
 	
-	public static List<MyVertex> getShortestWayBetween(int vertexId1, int vertexId2, Graph<MyVertex, Edge<MyVertex>> graph) throws QueueOverflow, QueueUnderflow {
+	public static List<MyVertex> getShortestPathBetween(int vertexId1, int vertexId2, Graph<MyVertex, Edge<MyVertex>> graph) throws QueueOverflow, QueueUnderflow {
 		BreadthFirstSearch bfs = new BreadthFirstSearch(graph, vertexId1);
 		List<MyVertex> verticesPath = new ArrayList<MyVertex>();
 		
