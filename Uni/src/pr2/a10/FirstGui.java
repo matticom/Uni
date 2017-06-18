@@ -44,6 +44,7 @@ public class FirstGui {
 			laecheln = !laecheln;
 			smileyModel.setKopfRadius(kopfRadius);
 			kopfRadius -= 3;
+			
 			if (j == 20) {
 				smileyModel.setPosition(100, 100);
 				augenKopfProzent = 13;
