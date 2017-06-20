@@ -1,4 +1,4 @@
-package pr2.a10;
+package pr2.a11;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -90,9 +90,7 @@ public class FirstSmileyPanel extends JPanel implements PropertyChangeListener {
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
-		if (!e.getPropertyName().equals("MODEL_UPDATE")) {
-			return;
-		} else {
+		if (e.getPropertyName().equals("MODEL_UPDATE")) {
 			updateProperties();
 			repaint();
 		}
