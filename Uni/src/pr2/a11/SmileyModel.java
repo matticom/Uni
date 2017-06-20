@@ -18,10 +18,10 @@ public class SmileyModel {
 		pChangeSupport = new PropertyChangeSupport(this);
 		kopfRadius = 200;
 		augenKopfProzent = 20;
-		augapfelWinkel = Math.PI/2;
+		augapfelWinkel = 0;
 		laecheln = false;
-		x = 0;
-		y = 0;
+		x = 75;
+		y = 50;
 	}
 	
 	public void setKopfRadius(int kopfRadius) {
@@ -44,6 +44,19 @@ public class SmileyModel {
 		generateAndFirePropertyChangeEvent();
 	}
 	
+	public void setPleased() {
+		laecheln = true;
+		augapfelWinkel = 0;
+		generateAndFirePropertyChangeEvent();
+	}
+	
+	public void setSad() {
+		laecheln = false;
+		augapfelWinkel = 90;
+		generateAndFirePropertyChangeEvent();
+	}
+	
+	
 	public void moveRelativ(int dx, int dy) {
 		x += dx;
 		y += dy;
@@ -57,7 +70,7 @@ public class SmileyModel {
 	}
 	
 	public void generateAndFirePropertyChangeEvent() {
-		PropertyChangeEvent e = new PropertyChangeEvent(this, "MODEL_UPDATE", null, null);
+		PropertyChangeEvent e = new PropertyChangeEvent(this, "MODEL_UPDATE", 0, 1);
 		firePropertyChangeEvent(e);
 	}
 

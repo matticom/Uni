@@ -104,7 +104,7 @@ public class FirstSmileyPanel extends JPanel implements PropertyChangeListener {
 		augapfelWinkel = smileyModel.getAugapfelWinkel();
 		laecheln = smileyModel.isLaecheln();
 		x = smileyModel.getX();
-		y = smileyModel.getX();
+		y = smileyModel.getY();
 	}
 			
 	private static class Point {

@@ -1,5 +1,6 @@
 package pr2.a11;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
@@ -8,7 +9,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.event.ChangeListener;
 
 public class GuiElementsGenerator {
 		
@@ -38,11 +38,13 @@ public class GuiElementsGenerator {
 		return lbl;
 	}
 	
-	public static JCheckBox createCheckBox(String cbText, int x, int y, int width, int height, 
-			ChangeListener controller, ChangeListener aaPCEventListener, String actionCommand, JComponent parent) {
+	public static JCheckBox createCheckBox(String cbText, int x, int y, int width, int height, Color background, 
+			ItemListener controller, ItemListener aaPCEventListener, String actionCommand, JComponent parent) {
 		JCheckBox cb = new JCheckBox(cbText);
-		cb.addChangeListener(controller);
-		cb.addChangeListener(aaPCEventListener);
+		cb.addItemListener(controller);
+		cb.addItemListener(aaPCEventListener);
+		cb.setBackground(background);
+		cb.setFocusPainted(false);
 		cb.setBounds(x, y, width, height);
 		cb.setActionCommand(actionCommand);
 		parent.add(cb);

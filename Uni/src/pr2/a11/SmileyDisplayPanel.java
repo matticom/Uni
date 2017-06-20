@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JPanel;
 
-public class FirstSmileyPanel extends JPanel implements PropertyChangeListener {
+public class SmileyDisplayPanel extends JPanel implements PropertyChangeListener {
 
 	protected int kopfRadius;
 	protected int augenKopfProzent;
@@ -20,17 +20,16 @@ public class FirstSmileyPanel extends JPanel implements PropertyChangeListener {
 
 	protected SmileyModel smileyModel;
 
-	public FirstSmileyPanel(SmileyModel smileyModel) {
+	public SmileyDisplayPanel(SmileyModel smileyModel) {
 		this.smileyModel = smileyModel;
 		setSize();
 		updateProperties();
 	}
 	
 	private void setSize() {
-		setSize(300, 400);
 		setMinimumSize(new Dimension(300, 400));
 		setMaximumSize(new Dimension(300, 400));
-		setPreferredSize(new Dimension(300, 400));
+		setSize(new Dimension(600, 500));
 	}
 
 	@Override
@@ -90,7 +89,9 @@ public class FirstSmileyPanel extends JPanel implements PropertyChangeListener {
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
-		if (e.getPropertyName().equals("MODEL_UPDATE")) {
+		if (!e.getPropertyName().equals("MODEL_UPDATE")) {
+			return;
+		} else {
 			updateProperties();
 			repaint();
 		}
@@ -102,7 +103,7 @@ public class FirstSmileyPanel extends JPanel implements PropertyChangeListener {
 		augapfelWinkel = smileyModel.getAugapfelWinkel();
 		laecheln = smileyModel.isLaecheln();
 		x = smileyModel.getX();
-		y = smileyModel.getX();
+		y = smileyModel.getY();
 	}
 			
 	private static class Point {
@@ -140,8 +141,9 @@ public class FirstSmileyPanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		public static Point berechneAugapfelPosition(Point auge, int augenRadius, double augapfelWinkel) {
-			int x_Rotation_Auge = (int) (auge.x + augenRadius/2 * Math.cos(augapfelWinkel));
-			int y_Rotation_Auge = (int) (auge.y + augenRadius/2 * Math.sin(augapfelWinkel));
+			double augapfelWinkelInRad = 2 * Math.PI / 360 * augapfelWinkel;
+			int x_Rotation_Auge = (int) (auge.x + augenRadius/2 * Math.cos(augapfelWinkelInRad));
+			int y_Rotation_Auge = (int) (auge.y + augenRadius/2 * Math.sin(augapfelWinkelInRad));
 			Point augapfel = new Point(x_Rotation_Auge, y_Rotation_Auge);
 			return kreisMitteZuObererLinkerEcke(augapfel, augenRadius/2);
 		}
