@@ -1,12 +1,12 @@
 package aud.a05;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Queue;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import aud.a03.QueueOverflow;
-import aud.a03.QueueUnderflow;
 
 public class BreadthFirstSearchTest {
 		
@@ -24,7 +24,7 @@ public class BreadthFirstSearchTest {
 	}
 	
 	@Test
-	public void testGraph8DirectedWithStart0() throws QueueOverflow, QueueUnderflow {
+	public void testGraph8DirectedWithStart0() {
 		System.out.println("Breitensuche: graph8.txt als gerichteter Graph mit Startknoten 0\n"
 				+ "------------------------------------------------------------------\n");
 		for(int i = 0; i < 9; i++) {
@@ -35,7 +35,7 @@ public class BreadthFirstSearchTest {
 	}
 	
 	@Test
-	public void testGraph8DirectedWithStart8() throws QueueOverflow, QueueUnderflow {
+	public void testGraph8DirectedWithStart8() {
 		System.out.println("Breitensuche: graph8.txt als gerichteter Graph mit Startknoten 8\n"
 				+ "------------------------------------------------------------------\n");
 		for(int i = 0; i < 9; i++) {
@@ -46,7 +46,7 @@ public class BreadthFirstSearchTest {
 	}
 	
 	@Test
-	public void testGraph20DirectedWithStart0() throws QueueOverflow, QueueUnderflow {
+	public void testGraph20DirectedWithStart0() {
 		System.out.println("Breitensuche: graph20.txt als gerichteter Graph mit Startknoten 0\n"
 				+ "------------------------------------------------------------------\n");
 		for(int i = 0; i < 8; i++) {
@@ -57,7 +57,7 @@ public class BreadthFirstSearchTest {
 	}
 	
 	@Test
-	public void testGraph20UndirectedWithStart0() throws QueueOverflow, QueueUnderflow {
+	public void testGraph20UndirectedWithStart0() {
 		System.out.println("Breitensuche: graph20.txt als ungerichteter Graph mit Startknoten 0\n"
 				+ "--------------------------------------------------------------------\n");
 		for(int i = 0; i < 8; i++) {
@@ -67,7 +67,13 @@ public class BreadthFirstSearchTest {
 		printPathBetween(0, 7, graph20_Undirected);
 	}
 	
-	public static void printShortestDistanceBetween(int startVertexId, int otherVertexId, Graph<MyVertex, Edge<MyVertex>> graph) throws QueueOverflow, QueueUnderflow {
+	@Test (expected = NoSuchElementException.class)
+	public void testQueueEmptyException() {
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.remove();
+	}
+	
+	public static void printShortestDistanceBetween(int startVertexId, int otherVertexId, Graph<MyVertex, Edge<MyVertex>> graph) {
 		int shortestD = BreadthFirstSearch.getShortestDistanceBetween(startVertexId, otherVertexId, graph);
 		System.out.printf("Die kürzeste Distanz zwischen Knoten %d und Knoten %d beträgt:    ", startVertexId, otherVertexId);
 
@@ -86,7 +92,7 @@ public class BreadthFirstSearchTest {
 		
 	}
 
-	public static void printPathBetween(int vertexId1, int vertexId2, Graph<MyVertex, Edge<MyVertex>> graph) throws QueueOverflow, QueueUnderflow {
+	public static void printPathBetween(int vertexId1, int vertexId2, Graph<MyVertex, Edge<MyVertex>> graph) {
 		List<MyVertex> pathList = BreadthFirstSearch.getShortestPathBetween(vertexId1, vertexId2, graph);
 		System.out.printf("Der Weg von Knoten %d nach Knoten %d: %28s", vertexId1, vertexId2, "");
 		for (MyVertex v : pathList) {
