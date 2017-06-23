@@ -13,7 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.JTextComponent;
 
 public class SmileyControlPanel extends JPanel  implements PropertyChangeListener {
 	
@@ -22,7 +26,7 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 	protected JLabel gemuetsLabel;
 	protected JCheckBox laechelnCheckBox;
 	protected JLabel laechelnLabel;
-	protected JTextField augenwinkelTF;
+	protected JSpinner augenwinkelSpinner;
 	protected JLabel augenwinkelLabel;
 	protected JTextField augenRadiusTF;
 	protected JLabel augenRadiusLabel;
@@ -32,6 +36,13 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 	protected Controller controller;
 	protected SmileyModel smileyModel;
 	protected AaPCEventPrinter eventPrinter;
+	
+	protected final int X_START = 20;
+	protected final int HEIGHT = 20;
+	protected final int LABEL_WIDTH = 270;
+	protected final int BUTTON_WIDTH = 100;
+	protected final int TEXTFIELD_WIDTH = 50;
+	protected final int CHECKBOX_WIDTH = 90;
 	
 	
 	public SmileyControlPanel(Controller controller, SmileyModel smileyModel, AaPCEventPrinter eventPrinter) {
@@ -62,27 +73,26 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 	protected void updateInputElements() {
 		kopfRadiusTF.setText(String.valueOf(smileyModel.getKopfRadius()));
 		augenRadiusTF.setText(String.valueOf(smileyModel.getAugenKopfProzent()));
-		augenwinkelTF.setText(String.valueOf(Math.round(10.0 * smileyModel.getAugapfelWinkel()) / 10.0));
+		augenwinkelSpinner.getModel().setValue(Double.valueOf(smileyModel.getAugapfelWinkel()));
 		laechelnCheckBox.setSelected(smileyModel.isLaecheln());
 	}
 	
 	protected void createGuiElements() {
-		kopfRadiusLabel = createLabel("Kopfradius [Pixel]", 20, 50, 200, 20, this);
-		kopfRadiusTF = createTextField("", 20, 80, 50, 20, controller, eventPrinter, "INPUT_KOPFRADIUS_JTEXTFIELD", this);
-		augenRadiusLabel = createLabel("Augenradius als Anteil von Kopfradius [%]", 20, 120, 270, 20, this);
-		augenRadiusTF = createTextField("", 20, 150, 50, 20, controller, eventPrinter, "INPUT_AUGENRADIUS_JTEXTFIELD", this);
-		augenwinkelLabel = createLabel("Winkel [°]", 20, 190, 200, 20, this);
-		augenwinkelTF = createTextField("Winkel in Grad", 20, 220, 50, 20, controller, eventPrinter, "INPUT_AUGENWINKEL_JTEXTFIELD", this);
-		laechelnCheckBox = createCheckBox("lächeln", 20, 265, 70, 20, Color.GREEN, controller, eventPrinter, "LAECHELN_CHECKBOX", this);
-		gemuetsLabel = createLabel("Gütszustand", 20, 300, 200, 20, this);
-		zufriedenButton = createButton("Zufrieden", 20, 330, 100, 20, controller, eventPrinter, "ZUFRIEDEN_BUTTON", this);
-		traurigButtuon = createButton("Traurig", 120, 330, 100, 20, controller, eventPrinter, "TRAURIG_BUTTON", this);
+		kopfRadiusLabel = createLabel("Kopfradius [Pixel]", X_START, 50, LABEL_WIDTH, HEIGHT, this);
+		kopfRadiusTF = createTextField("", X_START, 80, TEXTFIELD_WIDTH, HEIGHT, controller, eventPrinter, "INPUT_KOPFRADIUS_JTEXTFIELD", this);
+		augenRadiusLabel = createLabel("Augenradius als Anteil von Kopfradius [%]", X_START, 120, LABEL_WIDTH, HEIGHT, this);
+		augenRadiusTF = createTextField("", X_START, 150, TEXTFIELD_WIDTH, HEIGHT, controller, eventPrinter, "INPUT_AUGENRADIUS_JTEXTFIELD", this);
+		augenwinkelLabel = createLabel("Winkel [°]", X_START, 190, LABEL_WIDTH, HEIGHT, this);
+		augenwinkelSpinner = createSpinner("AUGENWINKEL_SPINNER", X_START, 220, TEXTFIELD_WIDTH, HEIGHT, controller, eventPrinter, "AUGENWINKEL_SPINNER", 0.0, 0.0, 360.0, 5.0, this);
+		laechelnCheckBox = createCheckBox("lächeln", X_START, 265, CHECKBOX_WIDTH, HEIGHT, Color.GREEN, controller, eventPrinter, "LAECHELN_CHECKBOX", this);
+		gemuetsLabel = createLabel("Gütszustand", X_START, 300, LABEL_WIDTH, HEIGHT, this);
+		zufriedenButton = createButton("Zufrieden", X_START, 330, BUTTON_WIDTH, HEIGHT, controller, eventPrinter, "ZUFRIEDEN_BUTTON", this);
+		traurigButtuon = createButton("Traurig", X_START+100, 330, BUTTON_WIDTH, HEIGHT, controller, eventPrinter, "TRAURIG_BUTTON", this);
 	}
 
 	public void setActionListener(ActionListener l) {
 		traurigButtuon.addActionListener(l);
 		zufriedenButton.addActionListener(l);
-		augenwinkelTF.addActionListener(l);
 		augenRadiusTF.addActionListener(l);
 		kopfRadiusTF.addActionListener(l);
 	}
@@ -90,7 +100,6 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 	public void removeActionListener(ActionListener l) {
 		traurigButtuon.removeActionListener(l);
 		zufriedenButton.removeActionListener(l);
-		augenwinkelTF.removeActionListener(l);
 		augenRadiusTF.removeActionListener(l);
 		kopfRadiusTF.removeActionListener(l);
 	}
@@ -101,5 +110,13 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 	
 	public void removeItemListener(ItemListener l) {
 		laechelnCheckBox.removeItemListener(l);
+	}
+	
+	public void setChangeListener(ChangeListener l) {
+		augenwinkelSpinner.getModel().addChangeListener(l);
+	}
+	
+	public void removeChangeListener(ChangeListener l) {
+		augenwinkelSpinner.getModel().removeChangeListener(l);
 	}
 }

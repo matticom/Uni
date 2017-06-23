@@ -10,8 +10,11 @@ import java.io.PrintWriter;
 import java.time.Instant;
 
 import javax.swing.JCheckBox;
+import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class AaPCEventPrinter implements ActionListener, PropertyChangeListener, ItemListener {
+public class AaPCEventPrinter implements ActionListener, PropertyChangeListener, ItemListener, ChangeListener {
 
 	private long start;
 	
@@ -39,5 +42,12 @@ public class AaPCEventPrinter implements ActionListener, PropertyChangeListener,
 		long timeStamp = Instant.now().toEpochMilli()-start;
 		PrintWriter out = new PrintWriter(System.out, true);
 		out.printf("Nutzer ändert Smileyparameter um %10d[ms]: %12s\n", timeStamp, ((JCheckBox)e.getSource()).getActionCommand());
+	}
+	
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		long timeStamp = Instant.now().toEpochMilli()-start;
+		PrintWriter out = new PrintWriter(System.out, true);
+		out.printf("Nutzer ändert Smileyparameter um %10d[ms]: %12s\n", timeStamp, ((JSpinner)e.getSource()).getName());
 	}
 }

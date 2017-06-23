@@ -8,7 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
 
 public class GuiElementsGenerator {
 		
@@ -60,5 +63,17 @@ public class GuiElementsGenerator {
 		tf.addActionListener(controller);
 		parent.add(tf);
 		return tf;
+	}
+	
+	public static JSpinner createSpinner(String cbText, int x, int y, int width, int height,
+			ChangeListener controller, ChangeListener aaPCEventListener, String actionCommand, 
+			Double startWert, Double minWert, Double maxWert, Double schrittWeite, JComponent parent) {
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(startWert,minWert,maxWert,schrittWeite));
+		spinner.addChangeListener(controller);
+		spinner.addChangeListener(aaPCEventListener);
+		spinner.setBounds(x, y, width, height);
+		spinner.setName(actionCommand);
+		parent.add(spinner);
+		return spinner;
 	}
 }
