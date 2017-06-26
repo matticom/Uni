@@ -30,7 +30,7 @@ public class BreadthFirstSearch {
 	 /**
      * Methode zum Initialisieren einer Breitensuche, wobei der Startknoten festgelegt wird
      * Der Status des Startknoten wird als "Nachbar noch nicht besucht" festgelegt, die Distanz des 
-     * knotens zu sich selbst ist 0
+     * Kknotens zu sich selbst ist 0
      * @param startId - Id des Startknoten, von dem die Breitensuche durchgeführt wird
      */
 	protected void initializeBFS(int startId) {
@@ -76,10 +76,18 @@ public class BreadthFirstSearch {
 		return bfs.graph.getVertex(otherVertexId).getDistance();
 	}
 	
+	/**
+     * Methode zur Ermittlung des Pfades zwischen zwei Knoten
+     * @param vertexId1 - Startknoten zur Ermittlung des Pfades zum weiteren Knoten
+     * @param vertexId2 - beliebiger Knoten, bis zu dem der Pfad vom Startknoten aus ermittelt werden soll
+     * @param graph - Graph in dem die Ermittlung des Pfades zwischen den beiden Knoten erfolgt
+     * @return Liste mit den Knoten im Pfad
+     */
 	public static List<MyVertex> getShortestPathBetween(int vertexId1, int vertexId2, Graph<MyVertex, Edge<MyVertex>> graph) {
 		BreadthFirstSearch bfs = new BreadthFirstSearch(graph, vertexId1);
 		List<MyVertex> verticesPath = new ArrayList<MyVertex>();
 		
+		// 1.Fall: Knoten sind identisch, Distanz ist 0, daher hat Pfad nur 1 Element 
 		if (vertexId1 == vertexId2) {
 			verticesPath.add(bfs.graph.getVertex(vertexId1));
 			return verticesPath;
@@ -89,18 +97,24 @@ public class BreadthFirstSearch {
 		MyVertex endVertex = bfs.graph.getVertex(vertexId2);
 		MyVertex predecessor = endVertex.getPredecessors();
 		
+		//	2. Fall(gerichteter Graph): Wenn der (End-)Knoten im Graph nicht erreicht wurde, 
+        //  also keine Vorgänger hat, dann nur Rückgabe einer neuen Knotens mit ID = Integer.MAX_VALUE
+		//	(bedeutet, dass kein Weg existiert)
 		if (predecessor == null) {
 			verticesPath.add(new MyVertex(Integer.MAX_VALUE));
 			return verticesPath;
 		}
 		verticesPath.add(endVertex);
 		
+		//	Rückwärts-Iteration bis der ermittelte Vorgänger (vom Endknoten aus) gleich 
+        //	dem Startknoten ist - Vorgänger werden jeweils einer Liste hinzugefügt
 		while (!predecessor.equals(startVertex)){
 			verticesPath.add(predecessor);
 			predecessor = predecessor.getPredecessors();
 		}
 		// predecessor == startVertex
 		verticesPath.add(predecessor);
+		//	da Liste in falscher Reihenfolge vorliegt, Umkehrung
 		Collections.reverse(verticesPath);
 		return verticesPath;
 	}

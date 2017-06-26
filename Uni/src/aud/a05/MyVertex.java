@@ -6,8 +6,13 @@ public class MyVertex extends Vertex {
 	private int distance;
 	private MyVertex predecessors;
 	
-
+	/**
+     * Konstruktor zum Instanziieren eines Knotens
+     * Status ist noch nicht besucht, Distanz auf Maximum gesetzt
+     * @param id - zugewiesene Id
+     */
 	public MyVertex(int id) {
+		// Initialiserung der Knoten
 		super(id);
 		visitStatus = VisitStatus.NOT_VISIT;
 		distance = Integer.MAX_VALUE;
@@ -36,8 +41,5 @@ public class MyVertex extends Vertex {
 	public void setPredecessors(MyVertex v) {
 		predecessors = v;
 	}
-	
-	public String toString() {
-		return super.toString();
-	}
+
 }
