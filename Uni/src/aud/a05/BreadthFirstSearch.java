@@ -13,13 +13,26 @@ public class BreadthFirstSearch {
 	protected Graph<MyVertex, Edge<MyVertex>> graph;
 	protected MyVertex startVertex;
 	
-	private BreadthFirstSearch(Graph<MyVertex, Edge<MyVertex>> graph, int startId) {
+	
+	/**
+     * Vollständiger Konstruktor für ein Breitensuche-Objekt
+     * @param graph - mit Knoten und der dazugehörigen Kante
+     * @param startId - Id des Startknotens
+     */
+	protected BreadthFirstSearch(Graph<MyVertex, Edge<MyVertex>> graph, int startId) {
 		this.graph = graph;
+		//Queue zum (Zwischen-)Speichern der Knoten
 		queue = new LinkedList<MyVertex>();
 		initializeBFS(startId);
 		breadthSearchAlgorithms();
 	}
 	
+	 /**
+     * Methode zum Initialisieren einer Breitensuche, wobei der Startknoten festgelegt wird
+     * Der Status des Startknoten wird als "Nachbar noch nicht besucht" festgelegt, die Distanz des 
+     * knotens zu sich selbst ist 0
+     * @param startId - Id des Startknoten, von dem die Breitensuche durchgeführt wird
+     */
 	protected void initializeBFS(int startId) {
 		startVertex = graph.getVertex(startId);
 		startVertex.setVisitStatus(VisitStatus.NEIGHBOURS_NOT_VISIT);
@@ -28,10 +41,16 @@ public class BreadthFirstSearch {
 		// die anderen Vertices werden autom. beim Instanziieren initialisiert
 	}
 	
+	/**
+     * Methode zur Durchführung Breitensuchenalgorithmus auf dem gegebenen Graphen
+     */
 	protected void breadthSearchAlgorithms() {
 		while (!queue.isEmpty()) {
+			//Der aktuell betrachtete Knoten wird aus der Queue entfernt
 			MyVertex currentVertex = queue.remove();
+			//Iteration durch alle Nachbarn des entfernten Knotens
 			for (MyVertex neighbour: graph.getNeighbours(currentVertex)) {
+				//Aktionen für noch nicht besuchte Knoten
 				if (neighbour.getVisitStatus() == VisitStatus.NOT_VISIT) {
 					neighbour.setVisitStatus(VisitStatus.NEIGHBOURS_NOT_VISIT);
 					neighbour.setDistance(currentVertex.getDistance()+1);
@@ -39,12 +58,21 @@ public class BreadthFirstSearch {
 					queue.add(neighbour);
 				}
 			}
+			//Alle Nachbarn des aktuell betrachteten Knotens sind besucht worden
 			currentVertex.setVisitStatus(VisitStatus.ALL_VISIT);
 		}
 	}
 	
+	 /**
+     * Methode zum Ermitteln der kürzesten Distanz zwischen zwei Knoten in einem gegebenen Graphen
+     * @param startVertexId - Startknoten
+     * @param otherVertexId - Endknoten
+     * @param graph - Graph, in dem die Distanzermittlung durchgeführt wird
+     * @return - Rückgabe der Distanz
+     */
 	public static int getShortestDistanceBetween(int startVertexId, int otherVertexId, Graph<MyVertex, Edge<MyVertex>> graph) {
 		BreadthFirstSearch bfs = new BreadthFirstSearch(graph, startVertexId);
+		//getDistance aus der Klasse MyVertex
 		return bfs.graph.getVertex(otherVertexId).getDistance();
 	}
 	
