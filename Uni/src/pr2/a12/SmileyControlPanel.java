@@ -1,4 +1,4 @@
-package pr2.a11;
+package pr2.a12;
 
 import java.awt.Color;
 import java.awt.Dimension;

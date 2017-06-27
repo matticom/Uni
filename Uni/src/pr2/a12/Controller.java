@@ -1,4 +1,4 @@
-package pr2.a11;
+package pr2.a12;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,9 +23,11 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
+		case StrConst.MB_PLEASED:
 		case StrConst.BTN_STFY:
 			smileyModel.setPleased();
 			break;
+		case StrConst.MB_SAD:
 		case StrConst.BTN_SAD:
 			smileyModel.setSad();
 			break;
@@ -35,6 +37,21 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 		case StrConst.TF_HEAD_RADIUS:
 			smileyModel.setKopfRadius(Integer.parseInt(((JTextField) e.getSource()).getText()));
 			break;
+		case StrConst.MB_E_ROT_LEFT:
+			smileyModel.rotateEyesLeft();
+			break;
+		case StrConst.MB_E_ROT_RIGHT:
+			smileyModel.rotateEyesRight();
+			break;
+		case StrConst.MB_H_DEC:
+			smileyModel.decreaseHead();
+			break;
+		case StrConst.MB_H_INC:
+			smileyModel.increaseHead();
+			break;
+		case StrConst.MB_RESET:
+			smileyModel.setDefaultSmiley();;
+			break;
 		}
 	}
 
@@ -42,7 +59,8 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 	public void itemStateChanged(ItemEvent e) {
 		if (!(e.getSource() instanceof JCheckBox)) {
 			return;
-		} else if (!(((JCheckBox) e.getSource()).getActionCommand().equals(StrConst.CB_SMILE))) {
+		} else if (!(((JCheckBox) e.getSource()).getActionCommand().equals(StrConst.CB_SMILE)) 
+				&& !(((JCheckBox) e.getSource()).getActionCommand().equals(StrConst.MB_SMILE))) {
 			return;
 		} else if (e.getStateChange() == ItemEvent.SELECTED) {
 			smileyModel.setLaecheln(true);
