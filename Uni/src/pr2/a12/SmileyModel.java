@@ -3,6 +3,7 @@ package pr2.a12;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Locale;
 
 public class SmileyModel {
 	private final PropertyChangeSupport pChangeSupport;
@@ -13,6 +14,7 @@ public class SmileyModel {
 	protected int augenKopfProzent;
 	protected double augapfelWinkel;
 	protected boolean laecheln;
+	protected Locale locale;
 	
 	public SmileyModel() {
 		pChangeSupport = new PropertyChangeSupport(this);
@@ -20,10 +22,20 @@ public class SmileyModel {
 		augenKopfProzent = 20;
 		augapfelWinkel = 0;
 		laecheln = false;
+		locale = Locale.US;
 		x = 75;
 		y = 50;
 	}
 	
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+		generateAndFirePropertyChangeEvent();
+	}
+
 	public void setKopfRadius(int kopfRadius) {
 		this.kopfRadius = kopfRadius;
 		generateAndFirePropertyChangeEvent();

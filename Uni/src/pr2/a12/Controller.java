@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Locale;
 
 import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
@@ -50,7 +51,28 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 			smileyModel.increaseHead();
 			break;
 		case StrConst.MB_RESET:
-			smileyModel.setDefaultSmiley();;
+			smileyModel.setDefaultSmiley();
+			break;
+		case StrConst.MB_EN:
+			smileyModel.setLocale(Locale.US);
+			break;
+		case StrConst.MB_DE:
+			smileyModel.setLocale(Locale.GERMANY);
+			break;
+		case StrConst.MB_ES:
+			smileyModel.setLocale(new Locale("es_ES"));
+			break;
+		case StrConst.BTN_DOWN:
+			smileyModel.moveRelativ(0, 5);
+			break;
+		case StrConst.BTN_LEFT:
+			smileyModel.moveRelativ(-5, 0);
+			break;
+		case StrConst.BTN_RIGHT:
+			smileyModel.moveRelativ(5, 0);
+			break;
+		case StrConst.BTN_UP:
+			smileyModel.moveRelativ(0, -5);
 			break;
 		}
 	}

@@ -19,12 +19,13 @@ public class ThirdGui {
 		smileyModel.addPropertyChangeListener(printer);
 		smileyModel.addPropertyChangeListener(smileyView);
 		smileyModel.addPropertyChangeListener(smileyControlPanel);
+		smileyModel.addPropertyChangeListener(guiMenuBar);
 		JFrame jFrame = new JFrame("Smiley");
 		jFrame.setJMenuBar(guiMenuBar);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jFrame.setSize(new Dimension(850, 600));
 		
-		GuiToolbar toolbar = new GuiToolbar();
+		GuiToolbar toolbar = new GuiToolbar(controller, printer);
 		Container contentPane = jFrame.getContentPane();
 	
 		jFrame.add(toolbar, BorderLayout.NORTH);

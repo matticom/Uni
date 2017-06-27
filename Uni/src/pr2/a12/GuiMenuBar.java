@@ -5,36 +5,39 @@ import java.beans.PropertyChangeListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static pr2.a12.GuiElementsGenerator.*;
-
-import javax.swing.JCheckBox;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 import pr2.a12.AaPCEventPrinter;
 import pr2.a12.Controller;
+import pr2.a12.ControlGuiElements.ControlMenu;
+import pr2.a12.ControlGuiElements.ControlMenuCheckBox;
+import pr2.a12.ControlGuiElements.ControlMenuItem;
+import pr2.a12.ControlGuiElements.ControlSubMenu;
 
 public class GuiMenuBar extends JMenuBar implements PropertyChangeListener {
 	
-	protected JMenu file;
-	protected JMenu smiley;
-	protected JMenuItem save;
-	protected JMenuItem load;
-	protected JMenuItem exit;
-	protected JCheckBox smile;
-	protected JMenu head;
-	protected JMenuItem incRadius;
-	protected JMenuItem decRadius;
-	protected JMenu eyes;
-	protected JMenuItem rotLeft;
-	protected JMenuItem rotRight;
-	protected JMenuItem pleased; 
-	protected JMenuItem sad;
-	protected JMenuItem reset;
+	protected ControlMenu file;
+	protected ControlMenu smiley;
+	protected ControlMenu language;
+	protected ControlMenuItem save;
+	protected ControlMenuItem load;
+	protected ControlMenuItem exit;
+	protected ControlMenuCheckBox smile;
+	protected ControlSubMenu head;
+	protected ControlMenuItem incRadius;
+	protected ControlMenuItem decRadius;
+	protected ControlSubMenu eyes;
+	protected ControlMenuItem rotLeft;
+	protected ControlMenuItem rotRight;
+	protected ControlMenuItem pleased; 
+	protected ControlMenuItem sad;
+	protected ControlMenuItem reset;
 	protected JSeparator separator1;
 	protected JSeparator separator2;
+	protected ControlMenuItem english;
+	protected ControlMenuItem german;
+	protected ControlMenuItem spanish;
 	
 	protected ResourceBundle resBundle;
 	
@@ -45,7 +48,8 @@ public class GuiMenuBar extends JMenuBar implements PropertyChangeListener {
 	
 	
 	public GuiMenuBar(Controller controller, SmileyModel smileyModel, AaPCEventPrinter eventPrinter) {
-		resBundle = ResourceBundle.getBundle("pr2.resourcesI18N.smileyMenu", new Locale("en_EN"));
+		locale = smileyModel.getLocale();
+		resBundle = ResourceBundle.getBundle("pr2.resourcesI18N.smileyMenu", locale);
 		this.controller = controller;
 		this.smileyModel = smileyModel;
 		this.eventPrinter = eventPrinter;
@@ -53,37 +57,62 @@ public class GuiMenuBar extends JMenuBar implements PropertyChangeListener {
 	}
 	
 	protected void createMenuElements() {
-		file = createMenu(this, resBundle.getString(StrConst.MB_FILE), StrConst.MB_FILE, 'f');
-		smiley = createMenu(this, resBundle.getString(StrConst.MB_SMILEY), StrConst.MB_SMILEY, 's');
-		save = createMenuItem(file, StrConst.MB_SAVE, controller, eventPrinter, resBundle.getString(StrConst.MB_SAVE), null, 'v');
-		load = createMenuItem(file, StrConst.MB_LOAD, controller, eventPrinter, resBundle.getString(StrConst.MB_LOAD), null, 'l');
-		exit = createMenuItem(file, StrConst.MB_EXIT, controller, eventPrinter, resBundle.getString(StrConst.MB_EXIT), null, 'x');
-		smile = createMenuItemCheckBox(smiley, StrConst.MB_SMILE, controller, eventPrinter, resBundle.getString(StrConst.MB_SMILE), null, 'm');
-		head = createSubMenu(smiley, StrConst.MB_HEAD, resBundle.getString(StrConst.MB_HEAD), null, 'h');
-		incRadius = createMenuItem(head, StrConst.MB_H_INC, controller, eventPrinter, resBundle.getString(StrConst.MB_H_INC), null, 'i');
-		decRadius = createMenuItem(head, StrConst.MB_H_DEC, controller, eventPrinter, resBundle.getString(StrConst.MB_H_DEC), null, 'd');
-		eyes = createSubMenu(smiley, StrConst.MB_EYES, resBundle.getString(StrConst.MB_EYES), null, 'y');
-		rotLeft = createMenuItem(eyes, StrConst.MB_E_ROT_LEFT, controller, eventPrinter, resBundle.getString(StrConst.MB_E_ROT_LEFT), null, 't');
-		rotRight = createMenuItem(eyes, StrConst.MB_E_ROT_RIGHT, controller, eventPrinter, resBundle.getString(StrConst.MB_E_ROT_RIGHT), null, 'g');
+		file = new ControlMenu(this, resBundle.getString(StrConst.MB_FILE), StrConst.MB_FILE, 'f');
+		smiley = new ControlMenu(this, resBundle.getString(StrConst.MB_SMILEY), StrConst.MB_SMILEY, 's');
+		language = new ControlMenu(this, resBundle.getString(StrConst.MB_LANG), StrConst.MB_LANG, 'u');
+		save = new ControlMenuItem(file, StrConst.MB_SAVE, controller, eventPrinter, resBundle.getString(StrConst.MB_SAVE), null, 'v');
+		load = new ControlMenuItem(file, StrConst.MB_LOAD, controller, eventPrinter, resBundle.getString(StrConst.MB_LOAD), null, 'l');
+		exit = new ControlMenuItem(file, StrConst.MB_EXIT, controller, eventPrinter, resBundle.getString(StrConst.MB_EXIT), null, 'x');
+		smile = new ControlMenuCheckBox(smiley, StrConst.MB_SMILE, controller, eventPrinter, resBundle.getString(StrConst.MB_SMILE), null, 'm');
+		head = new ControlSubMenu(smiley, StrConst.MB_HEAD, resBundle.getString(StrConst.MB_HEAD), null, 'h');
+		incRadius = new ControlMenuItem(head, StrConst.MB_H_INC, controller, eventPrinter, resBundle.getString(StrConst.MB_H_INC), null, 'i');
+		decRadius = new ControlMenuItem(head, StrConst.MB_H_DEC, controller, eventPrinter, resBundle.getString(StrConst.MB_H_DEC), null, 'd');
+		eyes = new ControlSubMenu(smiley, StrConst.MB_EYES, resBundle.getString(StrConst.MB_EYES), null, 'y');
+		rotLeft = new ControlMenuItem(eyes, StrConst.MB_E_ROT_LEFT, controller, eventPrinter, resBundle.getString(StrConst.MB_E_ROT_LEFT), null, 't');
+		rotRight = new ControlMenuItem(eyes, StrConst.MB_E_ROT_RIGHT, controller, eventPrinter, resBundle.getString(StrConst.MB_E_ROT_RIGHT), null, 'g');
 		separator1 = new JSeparator();
 		smiley.add(separator1);
-		pleased = createMenuItem(smiley, StrConst.MB_PLEASED, controller, eventPrinter, resBundle.getString(StrConst.MB_PLEASED), null, 'p'); 
-		sad = createMenuItem(smiley, StrConst.MB_SAD, controller, eventPrinter, resBundle.getString(StrConst.MB_SAD), null, 'a');
+		pleased = new ControlMenuItem(smiley, StrConst.MB_PLEASED, controller, eventPrinter, resBundle.getString(StrConst.MB_PLEASED), null, 'p'); 
+		sad = new ControlMenuItem(smiley, StrConst.MB_SAD, controller, eventPrinter, resBundle.getString(StrConst.MB_SAD), null, 'a');
 		separator2 = new JSeparator();
 		smiley.add(separator2);
-		reset = createMenuItem(smiley, StrConst.MB_RESET, controller, eventPrinter, resBundle.getString(StrConst.MB_RESET), null, 'r');
+		reset = new ControlMenuItem(smiley, StrConst.MB_RESET, controller, eventPrinter, resBundle.getString(StrConst.MB_RESET), null, 'r');
+		english = new ControlMenuItem(language, StrConst.MB_EN, controller, eventPrinter, resBundle.getString(StrConst.MB_EN), null, 'h');
+		german = new ControlMenuItem(language, StrConst.MB_DE, controller, eventPrinter, resBundle.getString(StrConst.MB_DE), null, 'n');
+		spanish = new ControlMenuItem(language, StrConst.MB_ES, controller, eventPrinter, resBundle.getString(StrConst.MB_ES), null, 'a');
 	}
 	
-	public void setLocale(Locale locale) {
-		this.locale = locale;
-	}
-
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if (!e.getPropertyName().equals("MODEL_UPDATE")) {
 			return;
 		} else {
-			smile.setSelected(smileyModel.isLaecheln());
+			updateMenuElements();
 		}
+	}
+	
+	protected void updateMenuElements() {
+		locale = smileyModel.getLocale();
+		resBundle = ResourceBundle.getBundle("pr2.resourcesI18N.smileyMenu", locale);
+		
+		file.setText(resBundle.getString(StrConst.MB_FILE));
+		smiley.setText(resBundle.getString(StrConst.MB_SMILEY));
+		language.setText(resBundle.getString(StrConst.MB_LANG));
+		save.setText(resBundle.getString(StrConst.MB_SAVE));
+		load.setText(resBundle.getString(StrConst.MB_LOAD));
+		exit.setText(resBundle.getString(StrConst.MB_EXIT));
+		smile.setText(resBundle.getString(StrConst.MB_SMILE));
+		head.setText(resBundle.getString(StrConst.MB_HEAD));
+		incRadius.setText(resBundle.getString(StrConst.MB_H_INC));
+		decRadius.setText(resBundle.getString(StrConst.MB_H_DEC));
+		eyes.setText(resBundle.getString(StrConst.MB_EYES));
+		rotLeft.setText(resBundle.getString(StrConst.MB_E_ROT_LEFT));
+		rotRight.setText(resBundle.getString(StrConst.MB_E_ROT_RIGHT));
+		pleased.setText(resBundle.getString(StrConst.MB_PLEASED));
+		sad.setText(resBundle.getString(StrConst.MB_SAD));
+		reset.setText(resBundle.getString(StrConst.MB_RESET));
+		english.setText(resBundle.getString(StrConst.MB_EN));
+		german.setText(resBundle.getString(StrConst.MB_DE));
+		spanish.setText(resBundle.getString(StrConst.MB_ES));
 	}
 }
