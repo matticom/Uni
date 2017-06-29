@@ -74,6 +74,9 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 		case StrConst.BTN_UP:
 			smileyModel.moveRelativ(0, -5);
 			break;
+		case StrConst.MB_EXIT:
+			System.exit(0);
+			break;
 		}
 	}
 

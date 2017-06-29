@@ -25,7 +25,7 @@ public class ThirdGui {
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jFrame.setSize(new Dimension(850, 600));
 		
-		GuiToolbar toolbar = new GuiToolbar(controller, printer);
+		GuiToolbar toolbar = new GuiToolbar(controller, smileyModel, printer);
 		Container contentPane = jFrame.getContentPane();
 	
 		jFrame.add(toolbar, BorderLayout.NORTH);
