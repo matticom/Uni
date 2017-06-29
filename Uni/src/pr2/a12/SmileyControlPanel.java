@@ -55,15 +55,19 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 	protected Locale locale;
 	protected ResourceBundle resBundle;
 	
+	protected final Color BG_COLOR;
+	
 	public SmileyControlPanel(Controller controller, SmileyModel smileyModel, AaPCEventPrinter eventPrinter) {
 		this.controller = controller;
 		this.smileyModel = smileyModel;
 		this.eventPrinter = eventPrinter;
 		locale = smileyModel.getLocale();
 		resBundle = ResourceBundle.getBundle("pr2.resourcesI18N.smileyControlPanel", locale);
+		BG_COLOR = new Color(0.27450981736183167f, 0.5098039507865906f, 	0.7058823704719543f, 1.0f);
 		configPanel();
 		createGuiElements();
 		updateInputElements();
+		
 	}
 		
 	@Override
@@ -77,7 +81,7 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 	}
 	
 	protected void configPanel() {
-		setBackground(Color.GREEN);
+		setBackground(BG_COLOR);
 		setPreferredSize(new Dimension(280, 500));
 		setLayout(null);
 	}
@@ -107,7 +111,7 @@ public class SmileyControlPanel extends JPanel  implements PropertyChangeListene
 		augenRadiusTF = new ControlTextField("", X_START, 150, TEXTFIELD_WIDTH, HEIGHT, controller, eventPrinter, StrConst.TF_EYE_RADIUS, this);
 		augenwinkelLabel = new ControlLabel(resBundle.getString(StrConst.LBL_EYE_ANGLE), X_START, 190, LABEL_WIDTH, HEIGHT, this);
 		augenwinkelSpinner = new ControlSpinner(X_START, 220, TEXTFIELD_WIDTH, HEIGHT, controller, eventPrinter, StrConst.SPIN_EYE_ANGLE, 0.0, -3600.0, 3600.0, 5.0, this);
-		laechelnCheckBox = new ControlCheckBox(resBundle.getString(StrConst.CB_SMILE), X_START, 265, CHECKBOX_WIDTH, HEIGHT, Color.GREEN, controller, eventPrinter, StrConst.CB_SMILE, this);
+		laechelnCheckBox = new ControlCheckBox(resBundle.getString(StrConst.CB_SMILE), X_START, 265, CHECKBOX_WIDTH, HEIGHT, BG_COLOR, controller, eventPrinter, StrConst.CB_SMILE, this);
 		gemuetsLabel = new ControlLabel(resBundle.getString(StrConst.LBL_MOOD), X_START, 300, LABEL_WIDTH, HEIGHT, this);
 		zufriedenButton = new ControlButton(resBundle.getString(StrConst.BTN_STFY), X_START, 330, BUTTON_WIDTH, HEIGHT, controller, eventPrinter, StrConst.BTN_STFY, null, this);
 		traurigButtuon = new ControlButton(resBundle.getString(StrConst.BTN_SAD), X_START+100, 330, BUTTON_WIDTH, HEIGHT, controller, eventPrinter, StrConst.BTN_SAD, null, this);

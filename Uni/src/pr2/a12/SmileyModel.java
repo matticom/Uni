@@ -3,7 +3,12 @@ package pr2.a12;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.util.Locale;
+
+import javax.swing.JOptionPane;
+
+import pr2.a12.Exception.FileHasNotChosenException;
 
 public class SmileyModel {
 	private final PropertyChangeSupport pChangeSupport;
@@ -15,6 +20,8 @@ public class SmileyModel {
 	protected double augapfelWinkel;
 	protected boolean laecheln;
 	protected Locale locale;
+	
+	protected AppPropertiesFileStoring propLoadSave;
 	
 	public SmileyModel() {
 		pChangeSupport = new PropertyChangeSupport(this);
@@ -151,5 +158,38 @@ public class SmileyModel {
 
 	public boolean isLaecheln() {
 		return laecheln;
+	}
+	
+	public void saveProps() {
+		String[] fields = new String[]{String.valueOf(x), String.valueOf(y), String.valueOf(kopfRadius),
+				String.valueOf(augenKopfProzent), String.valueOf(augapfelWinkel), String.valueOf(laecheln), locale.toString()};
+		if (propLoadSave == null) {
+			propLoadSave = new AppPropertiesFileStoring();
+		}
+		try {
+			propLoadSave.saveProperties(fields);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Save Property Error", "Error", JOptionPane.WARNING_MESSAGE);
+		} catch (FileHasNotChosenException e) {}
+	}
+	
+	public void loadProps() {
+		if (propLoadSave == null) {
+			propLoadSave = new AppPropertiesFileStoring();
+		}
+		String[] fields;
+		try {
+			fields = propLoadSave.loadProperties();
+			x = Integer.parseInt(fields[0]);
+			y = Integer.parseInt(fields[1]);
+			kopfRadius = Integer.parseInt(fields[2]);
+			augenKopfProzent = Integer.parseInt(fields[3]);
+			augapfelWinkel = Double.parseDouble(fields[4]);
+			laecheln = Boolean.parseBoolean(fields[5]);
+			locale = new Locale(fields[6]);
+			generateAndFirePropertyChangeEvent();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Load Property Error", "Error", JOptionPane.WARNING_MESSAGE);
+		} catch (FileHasNotChosenException e) {}
 	}
 }

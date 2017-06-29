@@ -7,7 +7,7 @@ public class ColorTableTest {
 	public static void main(String[] args) {
 		String[] fxColorNames = {"BISQUE", "BLACK", "CHARTREUSE", "CORAL", "CRIMSON", "DARKORCHID",
 								"DARKSEAGREEN", "DEEPPINK", "GOLD", "LIGHTBLUE", "MEDIUMPURPLE", 
-								"MIDNIGHTBLUE", "POWDERBLUE", "SILVER", "STEELBLUE", "TEAL"};
+								"MIDNIGHTBLUE", "POWDERBLUE", "SILVER", "TEAL", "STEELBLUE"};
 		DirtyPainter dp = new DirtyPainter();
 		ColorTable colorTable = new ColorTable(fxColorNames);
 		dp.add(colorTable);

@@ -77,6 +77,12 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 		case StrConst.MB_EXIT:
 			System.exit(0);
 			break;
+		case StrConst.MB_SAVE:
+			smileyModel.saveProps();
+			break;
+		case StrConst.MB_LOAD:
+			smileyModel.loadProps();
+			break;
 		}
 	}
 
