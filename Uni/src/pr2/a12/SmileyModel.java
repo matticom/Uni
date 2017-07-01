@@ -4,15 +4,17 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
 import pr2.a12.exceptions.FileHasNotBeenChosenException;
 import pr2.a12.utils.AppPropertiesFileStoring;
+import pr2.a12.utils.AppStateSerialization;
 
-public class SmileyModel {
-	private final PropertyChangeSupport pChangeSupport;
+public class SmileyModel implements Serializable {
+	protected transient PropertyChangeSupport propertyChangeSupport;
 	
 	protected int x;
 	protected int y;
@@ -21,11 +23,11 @@ public class SmileyModel {
 	protected double augapfelWinkel;
 	protected boolean laecheln;
 	protected Locale locale;
-	
-	protected AppPropertiesFileStoring propLoadSave;
+		
+//	protected AppPropertiesFileStoring propLoadSave;
 	
 	public SmileyModel() {
-		pChangeSupport = new PropertyChangeSupport(this);
+		propertyChangeSupport = new PropertyChangeSupport(this);
 		kopfRadius = 200;
 		augenKopfProzent = 20;
 		augapfelWinkel = 0;
@@ -37,6 +39,14 @@ public class SmileyModel {
 	
 	public Locale getLocale() {
 		return locale;
+	}
+		
+	public PropertyChangeSupport getPropertyChangeSupport() {
+		return propertyChangeSupport;
+	}
+
+	public void setPropertyChangeSupport(PropertyChangeSupport pChangeSupport) {
+		this.propertyChangeSupport = pChangeSupport;
 	}
 
 	public void setLocale(Locale locale) {
@@ -120,21 +130,32 @@ public class SmileyModel {
 		generateAndFirePropertyChangeEvent();
 	}
 	
+	public void setAllFields(String[] fields) {
+		x = Integer.parseInt(fields[0]);
+		y = Integer.parseInt(fields[1]);
+		kopfRadius = Integer.parseInt(fields[2]);
+		augenKopfProzent = Integer.parseInt(fields[3]);
+		augapfelWinkel = Double.parseDouble(fields[4]);
+		laecheln = Boolean.parseBoolean(fields[5]);
+		locale = new Locale(fields[6]);
+		generateAndFirePropertyChangeEvent();
+	}
+	
 	public void generateAndFirePropertyChangeEvent() {
 		PropertyChangeEvent e = new PropertyChangeEvent(this, "MODEL_UPDATE", 0, 1);
 		firePropertyChangeEvent(e);
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener l) {
-		pChangeSupport.addPropertyChangeListener(l);
+		propertyChangeSupport.addPropertyChangeListener(l);
 	}
 
 	public void removePropertyChangeListener(PropertyChangeListener l) {
-		pChangeSupport.removePropertyChangeListener(l);
+		propertyChangeSupport.removePropertyChangeListener(l);
 	}
 
 	protected void firePropertyChangeEvent(PropertyChangeEvent e) {
-		pChangeSupport.firePropertyChange(e);
+		propertyChangeSupport.firePropertyChange(e);
 	}
 
 	public int getX() {
@@ -161,36 +182,29 @@ public class SmileyModel {
 		return laecheln;
 	}
 	
-	public void saveProps() {
-		String[] fields = new String[]{String.valueOf(x), String.valueOf(y), String.valueOf(kopfRadius),
-				String.valueOf(augenKopfProzent), String.valueOf(augapfelWinkel), String.valueOf(laecheln), locale.toString()};
-		if (propLoadSave == null) {
-			propLoadSave = new AppPropertiesFileStoring();
-		}
-		try {
-			propLoadSave.saveProperties(fields);
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Save Property Error", "Error", JOptionPane.WARNING_MESSAGE);
-		} catch (FileHasNotBeenChosenException e) {}
+	public String[] getAllFields() {
+		return new String[]{	String.valueOf(x), 
+								String.valueOf(y), 
+								String.valueOf(kopfRadius),
+								String.valueOf(augenKopfProzent), 
+								String.valueOf(augapfelWinkel), 
+								String.valueOf(laecheln), 
+								locale.toString()
+							};
 	}
 	
-	public void loadProps() {
-		if (propLoadSave == null) {
-			propLoadSave = new AppPropertiesFileStoring();
-		}
-		String[] fields;
-		try {
-			fields = propLoadSave.loadProperties();
-			x = Integer.parseInt(fields[0]);
-			y = Integer.parseInt(fields[1]);
-			kopfRadius = Integer.parseInt(fields[2]);
-			augenKopfProzent = Integer.parseInt(fields[3]);
-			augapfelWinkel = Double.parseDouble(fields[4]);
-			laecheln = Boolean.parseBoolean(fields[5]);
-			locale = new Locale(fields[6]);
-			generateAndFirePropertyChangeEvent();
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Load Property Error", "Error", JOptionPane.WARNING_MESSAGE);
-		} catch (FileHasNotBeenChosenException e) {}
-	}
+//	public void saveProps() {
+//		if (propLoadSave == null) {
+//			propLoadSave = new AppPropertiesFileStoring(this);
+//		}
+//		propLoadSave.saveProperties();
+//	}
+//	
+//	public void loadProps() {
+//		if (propLoadSave == null) {
+//			propLoadSave = new AppPropertiesFileStoring(this);
+//		}
+//		propLoadSave.loadProperties();
+//	}
+	
 }

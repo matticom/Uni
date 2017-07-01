@@ -74,4 +74,10 @@ public class GuiToolbar extends JToolBar implements PropertyChangeListener {
 		down.setIcon(new ImageIcon(this.getClass().getResource(resBundle.getString(StrConst.BTN_DOWN))));
 		right.setIcon(new ImageIcon(this.getClass().getResource(resBundle.getString(StrConst.BTN_RIGHT))));
 	}
+
+	public void setSmileyModel(SmileyModel smileyModel) {
+		this.smileyModel = smileyModel;
+	}
+	
+	
 }

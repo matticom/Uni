@@ -4,18 +4,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.util.Locale;
 
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.JTextComponent;
+
+import pr2.a12.exceptions.FileHasNotBeenChosenException;
+import pr2.a12.utils.AppStateSerialization;
+import pr2.a12.views.GuiMenuBar;
+import pr2.a12.views.GuiToolbar;
+import pr2.a12.views.SmileyControlPanel;
+import pr2.a12.views.SmileyDisplayPanel;
 
 public class Controller implements ActionListener, ItemListener, ChangeListener {
 
 	protected SmileyModel smileyModel;
+	
+	protected AppStateSerialization objectSerialization;
+	protected PropertyChangeListener[] propertyChangeListenerArray;
 
 	public Controller(SmileyModel smileyModel) {
 		this.smileyModel = smileyModel;
@@ -78,10 +91,12 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 			System.exit(0);
 			break;
 		case StrConst.MB_SAVE:
-			smileyModel.saveProps();
+//			smileyModel.saveProps();
+			serializeSmileyModel();
 			break;
 		case StrConst.MB_LOAD:
-			smileyModel.loadProps();
+//			smileyModel = smileyModel.loadProps();
+			deSerializeSmileyModel();
 			break;
 		}
 	}
@@ -109,5 +124,40 @@ public class Controller implements ActionListener, ItemListener, ChangeListener 
 		} else {
 			smileyModel.setAugapfelWinkel((Double) (((JSpinner) e.getSource()).getModel().getValue()));
 		}
+	}
+	
+	public void setPropertyChangeListener(PropertyChangeListener[] propertyChangeListener) {
+		propertyChangeListenerArray = propertyChangeListener;
+	}
+	
+	public void deSerializeSmileyModel() {
+		if (objectSerialization == null) {
+			objectSerialization = new AppStateSerialization(smileyModel);
+		}
+		try {
+			smileyModel = objectSerialization.deSerializeState();
+			smileyModel.setPropertyChangeSupport(new PropertyChangeSupport(smileyModel));
+			for(PropertyChangeListener propertyChangeListener : propertyChangeListenerArray) {
+				smileyModel.addPropertyChangeListener(propertyChangeListener);
+			}
+			((SmileyDisplayPanel)propertyChangeListenerArray[1]).setSmileyModel(smileyModel);
+			((SmileyControlPanel)propertyChangeListenerArray[2]).setSmileyModel(smileyModel);
+			((GuiMenuBar)propertyChangeListenerArray[3]).setSmileyModel(smileyModel);
+			((GuiToolbar)propertyChangeListenerArray[4]).setSmileyModel(smileyModel);
+			smileyModel.generateAndFirePropertyChangeEvent();
+		} catch (IOException | ClassNotFoundException ex) {
+			JOptionPane.showMessageDialog(null, "Load Property Error", "Error", JOptionPane.WARNING_MESSAGE);
+		} catch (FileHasNotBeenChosenException e1) {}
+	}
+	
+	public void serializeSmileyModel() {
+		if (objectSerialization == null) {
+			objectSerialization = new AppStateSerialization(smileyModel);
+		}
+		try {
+			objectSerialization.serializeState();
+		} catch (IOException ex) {
+			JOptionPane.showMessageDialog(null, "Save Property Error", "Error", JOptionPane.WARNING_MESSAGE);
+		} catch (FileHasNotBeenChosenException e1) {}
 	}
 }

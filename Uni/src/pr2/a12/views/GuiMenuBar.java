@@ -117,4 +117,8 @@ public class GuiMenuBar extends JMenuBar implements PropertyChangeListener {
 		german.setText(resBundle.getString(StrConst.MB_DE));
 		spanish.setText(resBundle.getString(StrConst.MB_ES));
 	}
+
+	public void setSmileyModel(SmileyModel smileyModel) {
+		this.smileyModel = smileyModel;
+	}
 }

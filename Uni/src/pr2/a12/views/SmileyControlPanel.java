@@ -154,4 +154,8 @@ public class SmileyControlPanel extends JPanel implements PropertyChangeListener
 	public void removeChangeListener(ChangeListener l) {
 		augenwinkelSpinner.getModel().removeChangeListener(l);
 	}
+
+	public void setSmileyModel(SmileyModel smileyModel) {
+		this.smileyModel = smileyModel;
+	}
 }

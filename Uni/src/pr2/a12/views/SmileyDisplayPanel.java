@@ -157,4 +157,10 @@ public class SmileyDisplayPanel extends JPanel implements PropertyChangeListener
 		}
 	}
 
+	public void setSmileyModel(SmileyModel smileyModel) {
+		this.smileyModel = smileyModel;
+	}
+	
+	
+
 }
