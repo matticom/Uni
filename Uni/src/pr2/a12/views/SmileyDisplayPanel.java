@@ -1,4 +1,6 @@
-package pr2.a12;
+package pr2.a12.views;
+
+import static pr2.a12.utils.ColorUtil.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +9,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.JPanel;
+
+import pr2.a12.SmileyModel;
 
 public class SmileyDisplayPanel extends JPanel implements PropertyChangeListener {
 
@@ -17,11 +21,14 @@ public class SmileyDisplayPanel extends JPanel implements PropertyChangeListener
 	protected boolean laecheln;
 	protected int x;
 	protected int y;
+	
+	protected final Color BG_COLOR;
 
 	protected SmileyModel smileyModel;
 
 	public SmileyDisplayPanel(SmileyModel smileyModel) {
 		this.smileyModel = smileyModel;
+		BG_COLOR = convertFxColorToAwtColor(javafx.scene.paint.Color.POWDERBLUE);
 		setSize();
 		updateProperties();
 	}
@@ -30,6 +37,7 @@ public class SmileyDisplayPanel extends JPanel implements PropertyChangeListener
 		setMinimumSize(new Dimension(300, 400));
 		setMaximumSize(new Dimension(300, 400));
 		setSize(new Dimension(600, 500));
+		setBackground(BG_COLOR);
 	}
 
 	@Override

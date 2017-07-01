@@ -1,4 +1,4 @@
-package pr2.a12.ControlGuiElements;
+package pr2.a12.controlGuiElements;
 
 import java.awt.event.ActionListener;
 

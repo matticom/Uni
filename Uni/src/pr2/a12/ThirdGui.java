@@ -6,6 +6,11 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import pr2.a12.views.GuiMenuBar;
+import pr2.a12.views.GuiToolbar;
+import pr2.a12.views.SmileyControlPanel;
+import pr2.a12.views.SmileyDisplayPanel;
+
 public class ThirdGui {
 	public static void main(String[] args) {
 		
@@ -25,7 +30,7 @@ public class ThirdGui {
 		JFrame jFrame = new JFrame("Smiley");
 		jFrame.setJMenuBar(guiMenuBar);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jFrame.setSize(new Dimension(850, 600));
+		jFrame.setSize(new Dimension(1000, 1000));
 				
 		Container contentPane = jFrame.getContentPane();
 	

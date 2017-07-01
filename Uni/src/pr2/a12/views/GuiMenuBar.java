@@ -1,4 +1,4 @@
-package pr2.a12;
+package pr2.a12.views;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -10,10 +10,12 @@ import javax.swing.JSeparator;
 
 import pr2.a12.AaPCEventPrinter;
 import pr2.a12.Controller;
-import pr2.a12.ControlGuiElements.ControlMenu;
-import pr2.a12.ControlGuiElements.ControlMenuCheckBox;
-import pr2.a12.ControlGuiElements.ControlMenuItem;
-import pr2.a12.ControlGuiElements.ControlSubMenu;
+import pr2.a12.SmileyModel;
+import pr2.a12.StrConst;
+import pr2.a12.controlGuiElements.ControlMenu;
+import pr2.a12.controlGuiElements.ControlMenuCheckBox;
+import pr2.a12.controlGuiElements.ControlMenuItem;
+import pr2.a12.controlGuiElements.ControlSubMenu;
 
 public class GuiMenuBar extends JMenuBar implements PropertyChangeListener {
 	

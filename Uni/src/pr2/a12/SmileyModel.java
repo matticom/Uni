@@ -8,7 +8,8 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
-import pr2.a12.Exception.FileHasNotChosenException;
+import pr2.a12.exceptions.FileHasNotBeenChosenException;
+import pr2.a12.utils.AppPropertiesFileStoring;
 
 public class SmileyModel {
 	private final PropertyChangeSupport pChangeSupport;
@@ -29,7 +30,7 @@ public class SmileyModel {
 		augenKopfProzent = 20;
 		augapfelWinkel = 0;
 		laecheln = false;
-		locale = Locale.US;
+		locale = new Locale("es_ES");
 		x = 75;
 		y = 50;
 	}
@@ -170,7 +171,7 @@ public class SmileyModel {
 			propLoadSave.saveProperties(fields);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Save Property Error", "Error", JOptionPane.WARNING_MESSAGE);
-		} catch (FileHasNotChosenException e) {}
+		} catch (FileHasNotBeenChosenException e) {}
 	}
 	
 	public void loadProps() {
@@ -190,6 +191,6 @@ public class SmileyModel {
 			generateAndFirePropertyChangeEvent();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Load Property Error", "Error", JOptionPane.WARNING_MESSAGE);
-		} catch (FileHasNotChosenException e) {}
+		} catch (FileHasNotBeenChosenException e) {}
 	}
 }
