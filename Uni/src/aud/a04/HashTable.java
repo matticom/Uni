@@ -5,7 +5,7 @@ import java.util.List;
 
 public class HashTable<K, V> implements Map<K, V> {
 
-	protected Object[] array;
+	protected List<KeyValuePair<K, V>>[] array;
 	protected int arraySize;
 	protected Occupancy occupancy;
 	protected final double ARRAY_EXTENSION_FACTOR = 2.75;
@@ -14,7 +14,7 @@ public class HashTable<K, V> implements Map<K, V> {
 	
 	public HashTable(int arraySize) {
 		this.arraySize = arraySize;
-		array = new Object[arraySize];
+		array = (LinkedList<KeyValuePair<K, V>>[]) new LinkedList[arraySize];
 		occupancy = new Occupancy(arraySize);
 	}
 
@@ -91,7 +91,7 @@ public class HashTable<K, V> implements Map<K, V> {
 		int oldArraySize = arraySize;
 		Object[] oldArray = array;
 		arraySize = (int)(ARRAY_EXTENSION_FACTOR * oldArraySize);
-		array = new Object[arraySize];
+		array = new LinkedList[arraySize];
 		occupancy.extendArraySizeTo(arraySize);
 		
 		for (int i = 0; i < oldArraySize; i++) {
