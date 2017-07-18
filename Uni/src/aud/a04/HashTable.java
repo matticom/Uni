@@ -89,11 +89,10 @@ public class HashTable<K, V> implements Map<K, V> {
 	
 	private void extendArray() {
 		int oldArraySize = arraySize;
-		Object[] oldArray = array;
+		List<KeyValuePair<K, V>>[] oldArray = array;
 		arraySize = (int)(ARRAY_EXTENSION_FACTOR * oldArraySize);
-		array = new LinkedList[arraySize];
+		array = (LinkedList<KeyValuePair<K, V>>[]) new LinkedList[arraySize];
 		occupancy.extendArraySizeTo(arraySize);
-		
 		for (int i = 0; i < oldArraySize; i++) {
 			List<KeyValuePair<K, V>> bucketList = (List<KeyValuePair<K, V>>) oldArray[i];
 			if (bucketList != null) {
