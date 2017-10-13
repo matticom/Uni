@@ -22,23 +22,18 @@ public class AppStateSerialization extends AbstractAppStateStoring {
 	}
 
 	public void serializeState() throws IOException, FileHasNotBeenChosenException {
-		try {
-			chooseFileDialog(JFileChooser.SAVE_DIALOG);
-			try (FileOutputStream fos = new FileOutputStream(recentFile)) {
-				ObjectOutputStream o = new ObjectOutputStream( fos );
-				o.writeObject(smileyModel);
-			}
-		} catch (FileHasNotBeenChosenException e) {
-			new FileHasNotBeenChosenException();
+		chooseFileDialog(JFileChooser.SAVE_DIALOG);
+		try (FileOutputStream fos = new FileOutputStream(recentFile)) {
+			ObjectOutputStream o = new ObjectOutputStream(fos);
+			o.writeObject(smileyModel);
 		}
 	}
 
 	public SmileyModel deSerializeState() throws FileHasNotBeenChosenException, ClassNotFoundException, IOException {
 		chooseFileDialog(JFileChooser.OPEN_DIALOG);
-				
 		try (FileInputStream fis = new FileInputStream(recentFile)) {
-		  ObjectInputStream o = new ObjectInputStream( fis );
-		  return (SmileyModel) o.readObject();
+			ObjectInputStream o = new ObjectInputStream(fis);
+			return (SmileyModel) o.readObject();
 		}
 	}
 

@@ -12,20 +12,20 @@ import java.util.stream.IntStream;
 
 public class Rekursion {
 	public static int[] createArray(Scanner in) {
-//		int integ = in.nextInt();
-//		int[] numbers = IntStream.range(0, integ).map(i -> in.nextInt()).toArray();
-		
-		
-//		List<Integer> list = new ArrayList<>();
-//
-//        list = IntStream.range(0,in.nextInt()).map(i -> in.nextInt()).boxed().collect(Collectors.toList());
-//        System.out.println(list);
-//		return convertListToArray(list);
-		
-		
+		// int integ = in.nextInt();
+		// int[] numbers = IntStream.range(0, integ).map(i ->
+		// in.nextInt()).toArray();
+
+		// List<Integer> list = new ArrayList<>();
+		//
+		// list = IntStream.range(0,in.nextInt()).map(i ->
+		// in.nextInt()).boxed().collect(Collectors.toList());
+		// System.out.println(list);
+		// return convertListToArray(list);
+
 		return convertListToArray(scanIntValuesToList(in));
 	}
-	
+
 	private static List<Integer> scanIntValuesToList(Scanner in) {
 		List<Integer> arrayList = new ArrayList<Integer>();
 		while (in.hasNextInt()) {
@@ -33,21 +33,21 @@ public class Rekursion {
 		}
 		return arrayList;
 	}
-	
+
 	private static int[] convertListToArray(List<Integer> arrayList) {
-//		int[] array = new int[arrayList.size()];
-//		for(int i = 0; i < arrayList.size(); i++){
-//			array[i] = arrayList.get(i);
-//		}
-//		return array;
-		return arrayList.stream().mapToInt(i->i).toArray();
+		// int[] array = new int[arrayList.size()];
+		// for(int i = 0; i < arrayList.size(); i++){
+		// array[i] = arrayList.get(i);
+		// }
+		// return array;
+		return arrayList.stream().mapToInt(i -> i).toArray();
 	}
 
 	public static int[] createArray(String file) {
-		try (FileReader reader = new FileReader(file); Scanner in = new Scanner(reader)){
+		try (FileReader reader = new FileReader(file); Scanner in = new Scanner(reader)) {
 			return createArray(in);
 		} catch (IOException e) {
-			System.out.println("Datei " +  file + " nicht gefunden");
+			System.out.println("Datei " + file + " nicht gefunden");
 		}
 		return null;
 	}
@@ -65,7 +65,7 @@ public class Rekursion {
 
 	public static int indexOfStandard(int number, int[] array) {
 		int retValue = -1;
-		for(int i = 0; i < array.length; i++){
+		for (int i = 0; i < array.length; i++) {
 			if (array[i] == number) {
 				return i;
 			}
@@ -74,29 +74,27 @@ public class Rekursion {
 	}
 
 	public static int indexOfRecursiv(int number, int[] array) {
-		return indexOfRecursiv(number, array, 0, array.length-1);
+		if (array.length == 0) {
+			return -1;
+		} else {
+			return indexOfRecursiv(number, array, 0, array.length - 1);
+		}
 	}
 
 	public static int indexOfRecursiv(int number, int[] array, int startIndex, int endIndex) {
-		if (endIndex == -1) {
-			return -1;
+		int midPosition = (endIndex + startIndex + 1) / 2;
+		if (array[midPosition] == number) {
+			return midPosition;
 		}
-		int midPosition = (endIndex+startIndex+1) / 2;
+		
 		if (startIndex != endIndex) {
-			if (array[midPosition] == number) {
-				return midPosition;
-			}
 			if (array[midPosition] > number) {
 				return indexOfRecursiv(number, array, startIndex, midPosition - 1);
 			} else {
 				return indexOfRecursiv(number, array, midPosition + 1, endIndex);
 			}
 		} else {
-			if (array[startIndex] == number) {
-				return startIndex;
-			} else {
-				return -1;
-			}
+			return -1;
 		}
 	}
 

@@ -3,10 +3,14 @@ package pr2.a01;
 public class Aufgabe_13 {
 	public static void main(String[] sonja) {
 		for(int n = 1; n <= 3; n++) {
+			
 			try {
 				met01(n);
+			} catch (NullPointerException exa) { // Subklassen werden auch abgefangen
+				System.out.println("NP Ex");
 			} catch (Exa exa) { // Subklassen werden auch abgefangen
 				System.out.println("R ex:A");
+			
 			} finally {
 				System.out.println("S ----");
 			}

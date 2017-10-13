@@ -1,6 +1,7 @@
 package pr2.a04;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,8 +32,12 @@ public class TreeFactory {
 	private static String[] readLines(String path) {
 		try (FileReader reader = new FileReader(new File(path)); Scanner in = new Scanner(reader)){
 			return createArray(in);
-		} catch (IOException e) {
+		} catch (NullPointerException e) {
+			System.err.println("NP");
+		} catch (FileNotFoundException e) {
 			System.err.println("Datei " +  path + " nicht gefunden");
+		} catch (IOException e1) {
+			System.err.println("Problem bei close");
 		}
 		return null;
 	}

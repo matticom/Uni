@@ -39,7 +39,8 @@ public class ThirdGui {
 		jFrame.setSize(new Dimension(1000, 700));
 				
 		Container contentPane = jFrame.getContentPane();
-	
+		contentPane.setLayout(new BorderLayout());
+			
 		jFrame.add(toolbar, BorderLayout.NORTH);
 		contentPane.add(smileyDisplayPanel, BorderLayout.CENTER);
 		contentPane.add(smileyControlPanel, BorderLayout.EAST);

@@ -34,9 +34,9 @@ public class SmileyDisplayPanel extends JPanel implements PropertyChangeListener
 	}
 	
 	private void setSize() {
-		setMinimumSize(new Dimension(300, 400));
-		setMaximumSize(new Dimension(300, 400));
-		setSize(new Dimension(600, 500));
+//		setMinimumSize(new Dimension(300, 400));
+//		setMaximumSize(new Dimension(300, 400));
+//		setSize(new Dimension(600, 500));
 		setBackground(BG_COLOR);
 	}
 

@@ -96,6 +96,7 @@ public class GuiMenuBar extends JMenuBar implements PropertyChangeListener {
 	protected void updateMenuElements() {
 		locale = smileyModel.getLocale();
 		resBundle = ResourceBundle.getBundle("pr2.resourcesI18N.smileyMenu", locale);
+		smile.setSelected(smileyModel.isLaecheln());
 		
 		file.setText(resBundle.getString(StrConst.MB_FILE));
 		smiley.setText(resBundle.getString(StrConst.MB_SMILEY));

@@ -141,7 +141,7 @@ public class SmileyModel implements Serializable {
 		generateAndFirePropertyChangeEvent();
 	}
 	
-	public void generateAndFirePropertyChangeEvent() {
+	protected void generateAndFirePropertyChangeEvent() {
 		PropertyChangeEvent e = new PropertyChangeEvent(this, "MODEL_UPDATE", 0, 1);
 		firePropertyChangeEvent(e);
 	}
